@@ -1,0 +1,41 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    ext {
+        buildToolsVersion = findProperty('android.buildToolsVersion') ?: '33.0.0'
+        minSdkVersion = Integer.parseInt(findProperty('android.minSdkVersion') ?: '21')
+        compileSdkVersion = Integer.parseInt(findProperty('android.compileSdkVersion') ?: '33')
+        targetSdkVersion = Integer.parseInt(findProperty('android.targetSdkVersion') ?: '33')
+        ndkVersion = "23.1.7779620" // Optional: specify if using NDK
+        // kotlinVersion = findProperty('android.kotlinVersion') ?: '1.8.20' // Default Kotlin version
+        kotlinVersion = '1.8.20'
+    }
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        // classpath 'com.android.tools.build:gradle:7.4.1'
+        classpath("com.android.tools.build:gradle:7.3.0")
+        // classpath("com.android.tools.build:gradle:8.0.2")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
+        classpath 'com.facebook.react:react-native-gradle-plugin:0.71.19' // Update to the correct version
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+        maven { url 'https://www.jitpack.io' }
+
+        // Ensure these URLs are necessary for your project.
+        // You can remove these if you're not using any JSC or React Native binaries from npm
+        maven {
+            url new File(['node', '--print', "require.resolve('react-native/package.json')"].execute(null, rootDir).text.trim(), '../android')
+        }
+        maven {
+            url new File(['node', '--print', "require.resolve('jsc-android/package.json')"].execute(null, rootDir).text.trim(), '../dist')
+        }
+    }
+}

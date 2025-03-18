@@ -1,0 +1,3 @@
+// android/app/autolinking.gradle
+
+apply from: "../../node_modules/react-native/react.gradle"
