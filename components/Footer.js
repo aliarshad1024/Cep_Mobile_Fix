@@ -2,11 +2,11 @@ import { View, Text, TouchableOpacity, Image } from "react-native";
 import React from "react";
 import { connect } from "react-redux";
 import { changeThemeColor } from "../redux/actions/authActions";
-import {
-  Ionicons,
-  FontAwesome,
-  MaterialCommunityIcons,
-} from "@expo/vector-icons";
+// import {
+//   Ionicons,
+//   FontAwesome,
+//   MaterialCommunityIcons,
+// } from "@expo/vector-icons";
 const Footer = (props) => {
   let jobsActive;
   let profileActive;
@@ -89,7 +89,7 @@ const Footer = (props) => {
                 : "#333",
           }}
         /> */}
-        <Ionicons
+        {/* <Ionicons
           name="home"
           size={26}
           color={
@@ -100,7 +100,7 @@ const Footer = (props) => {
               ? props.auth.themeMainColor
               : "black"
           }
-        />
+        /> */}
 
         <Text style={{ fontSize: 10, color: "rgba(176, 176, 176, 1)" }}>
           Home
@@ -183,7 +183,7 @@ const Footer = (props) => {
         style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
         onPress={() => props.navigation.navigate("Settings")}
       >
-        <Ionicons
+        {/* <Ionicons
           name="md-settings"
           size={26}
           color={
@@ -191,7 +191,7 @@ const Footer = (props) => {
               ? props.auth.themeMainColor
               : "black"
           }
-        />
+        /> */}
 
         <Text style={{ fontSize: 10, color: "rgba(176, 176, 176, 1)" }}>
           Settings

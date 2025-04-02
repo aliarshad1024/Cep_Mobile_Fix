@@ -15,7 +15,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { connect } from "react-redux";
 import { logout } from "../../redux/actions/authActions";
 import { useFonts } from "expo-font";
-import { MaterialIcons, Feather, Entypo } from "@expo/vector-icons";
+// import { MaterialIcons, Feather, Entypo } from "@expo/vector-icons";
 import Footer from "../../components/Footer";
 import { Rubik_400Regular } from "@expo-google-fonts/rubik";
 import { SelectList } from "react-native-dropdown-select-list";
@@ -287,14 +287,14 @@ const CustomizeQuiz = (props) => {
             style={{ marginRight: 20 }}
             onPress={() => props.navigation.goBack()}
           >
-            <Feather name="arrow-left" size={24} color="black" />
+            {/* <Feather name="arrow-left" size={24} color="black" /> */}
           </TouchableOpacity>
           <Text
             style={{
               textAlign: "center",
               marginRight: 20,
               fontSize: 18,
-              fontWeight: 600,
+              fontWeight: "600",
               fontFamily: "Rubik_400Regular",
             }}
           >
@@ -340,7 +340,7 @@ const CustomizeQuiz = (props) => {
               style={{
                 color: showSavedQuizzes ? "#FFFFFF" : "#000",
                 fontSize: 12,
-                fontWeight: 600,
+                fontWeight: "600",
                 fontFamily: "Rubik_400Regular",
               }}
               selectable={false}
@@ -385,7 +385,7 @@ const CustomizeQuiz = (props) => {
               style={{
                 color: !showSavedQuizzes ? "#FFFFFF" : "#000",
                 fontSize: 12,
-                fontWeight: 600,
+                fontWeight: "600",
                 fontFamily: "Rubik_400Regular",
               }}
               selectable={false}
@@ -412,7 +412,7 @@ const CustomizeQuiz = (props) => {
                   borderColor: "rgba(189, 189, 189, 1)",
                 }}
               >
-                <MaterialIcons name="search" size={17} color="#BDBDBD" />
+                {/* <MaterialIcons name="search" size={17} color="#BDBDBD" /> */}
                 <TextInput
                   style={{
                     marginLeft: 5,
@@ -461,7 +461,7 @@ const CustomizeQuiz = (props) => {
                           style={{
                             fontSize: 18,
                             color: props.auth.themeMainColor,
-                            fontWeight: 500,
+                            fontWeight: "500",
                             fontFamily: "Rubik_400Regular",
                             marginTop: 10,
                           }}
@@ -498,7 +498,7 @@ const CustomizeQuiz = (props) => {
                                 fontSize: 13,
                                 color: "#A3A3A3",
                                 fontFamily: "Rubik_400Regular",
-                                fontWeight: 400,
+                                fontWeight: "400",
                                 marginVertical: 2,
                               }}
                               key={`quiz ${t}`}
@@ -536,7 +536,7 @@ const CustomizeQuiz = (props) => {
                           style={{
                             color: "#FFFFFF",
                             fontSize: 12,
-                            fontWeight: 600,
+                            fontWeight: "600",
                             fontFamily: "Rubik_400Regular",
                           }}
                         >
@@ -563,7 +563,7 @@ const CustomizeQuiz = (props) => {
                           style={{
                             color: "#FFFFFF",
                             fontSize: 12,
-                            fontWeight: 600,
+                            fontWeight: "600",
                             fontFamily: "Rubik_400Regular",
                           }}
                         >
@@ -581,7 +581,7 @@ const CustomizeQuiz = (props) => {
                 style={{
                   marginTop: 140,
                   fontFamily: "Rubik_400Regular",
-                  fontWeight: 400,
+                  fontWeight: "400",
                   color: "rgba(139, 139, 139, 1)",
                   fontSize: 16,
                   textAlign:'center'
@@ -597,7 +597,7 @@ const CustomizeQuiz = (props) => {
           <Text
             style={{
               fontSize: 20,
-              fontWeight: 400,
+              fontWeight: "400",
               color: props.auth.themeMainColor,
               fontFamily: "Rubik_400Regular",
               marginBottom: 8,
@@ -624,7 +624,7 @@ const CustomizeQuiz = (props) => {
                 <Text
                   style={{
                     fontSize: 14,
-                    fontWeight: 500,
+                    fontWeight: "500",
                     marginLeft: 10,
                     marginBottom: 5,
                     marginTop: 15,
@@ -710,7 +710,7 @@ const CustomizeQuiz = (props) => {
                     <Text
                       style={{
                         color: "white",
-                        fontWeight: 600,
+                        fontWeight: "600",
                         fontSize: 14,
                         fontFamily: "Rubik_400Regular",
                       }}
@@ -760,7 +760,7 @@ const CustomizeQuiz = (props) => {
                     <Text
                       style={{
                         fontSize: 14,
-                        fontWeight: 600,
+                        fontWeight: "600",
                         fontFamily: "Rubik_400Regular",
                         color: !quizUpdate ? "white" : "white",
                       }}
@@ -794,7 +794,7 @@ const CustomizeQuiz = (props) => {
                     <Text
                       style={{
                         fontSize: 14,
-                        fontWeight: 500,
+                        fontWeight: "500",
                         marginLeft: 10,
                         marginBottom: 10,
                       }}
@@ -806,7 +806,7 @@ const CustomizeQuiz = (props) => {
                         onPress={() => removeCustomizeQuiz(index)}
                         style={{ alignItems: "flex-end" }}
                       >
-                        <Entypo name="cross" size={20} color="black" />
+                        {/* <Entypo name="cross" size={20} color="black" /> */}
                       </TouchableOpacity>
                     )}
                   </View>
@@ -899,7 +899,7 @@ const CustomizeQuiz = (props) => {
                     <Text
                       style={{
                         fontSize: 14,
-                        fontWeight: 500,
+                        fontWeight: "500",
                         marginLeft: 10,
                         marginBottom: 5,
                         marginTop: 15,

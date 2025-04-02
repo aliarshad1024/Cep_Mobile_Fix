@@ -1,6 +1,6 @@
 import { View, Text, TouchableOpacity, TextInput, Alert } from "react-native";
 import React, { useState, useEffect } from "react";
-import { Entypo, EvilIcons } from "@expo/vector-icons";
+// import { Entypo, EvilIcons } from "@expo/vector-icons";
 import { connect } from "react-redux";
 const Pagination = (props) => {
   const [page, setPage] = useState(props.page);
@@ -40,14 +40,14 @@ const Pagination = (props) => {
           onPress={() => props.updatePage("dec")}
           disabled={page < 1}
         >
-          <EvilIcons
+          {/* <EvilIcons
             name="arrow-left"
             size={33}
             style={{
               color:
                 page > 1 ? props.auth.themeMainColor : "rgba(163, 163, 163, 1)",
             }}
-          />
+          /> */}
         </TouchableOpacity>
 
         <Text
@@ -85,7 +85,7 @@ const Pagination = (props) => {
           }}
         />
 
-        <Text style={{ fontWeight: 400, fontSize: 16, marginLeft: 5 }}>
+        <Text style={{ fontWeight: "400", fontSize: 16, marginLeft: 5 }}>
           /{totalPages}
         </Text>
         <TouchableOpacity
@@ -96,7 +96,7 @@ const Pagination = (props) => {
           }
           disabled={page >= props.route.params.totalQuestions / 10}
         >
-          <EvilIcons
+          {/* <EvilIcons
             name="arrow-right"
             size={33}
             style={{
@@ -105,7 +105,7 @@ const Pagination = (props) => {
                   ? props.auth.themeMainColor
                   : "rgba(163, 163, 163, 1)",
             }}
-          />
+          /> */}
         </TouchableOpacity>
       </View>
       <View>

@@ -1,6 +1,6 @@
 import { View, Text, TouchableOpacity, Image, StyleSheet } from "react-native";
 import React from "react";
-import { Feather } from "@expo/vector-icons";
+// import { Feather } from "@expo/vector-icons";
 
 const ChapterItem = ({ mainProps, item, openOptions, index, openOPtionCallback, quizClicked, mcqsClicked }) => {
 
@@ -27,7 +27,7 @@ const ChapterItem = ({ mainProps, item, openOptions, index, openOPtionCallback, 
       >
         {item.name}
       </Text>
-      {openOptions !== item.id ? (
+      {/* {openOptions !== item.id ? (
         <View style={styles.rightMargin}>
           <Feather
             name="chevron-down"
@@ -43,7 +43,7 @@ const ChapterItem = ({ mainProps, item, openOptions, index, openOPtionCallback, 
             color="rgba(142, 142, 142, 1)"
           />
         </View>
-      )}
+      )} */}
     </View>
     <Text
       style={styles.secondaryTextStyler}
@@ -115,7 +115,7 @@ const styles= StyleSheet.create({
          nameTextStyler:{
             fontSize: 18,
            // color: props.auth.themeMainColor,
-            fontWeight: 500,
+            fontWeight: "500",
             fontFamily: "Rubik_400Regular",
         },
         rightMargin:{
@@ -123,7 +123,7 @@ const styles= StyleSheet.create({
         },
         secondaryTextStyler:{
             fontSize: 14,
-            fontWeight: 400,
+            fontWeight: "400",
             fontFamily: "Rubik_400Regular",
         },
         secondayViewStyler:{
@@ -145,7 +145,7 @@ const styles= StyleSheet.create({
         buttonTxt:{
           color: "#FFFFFF",
           fontSize: 12,
-          fontWeight: 600,
+          fontWeight: "600",
           fontFamily: "Rubik_400Regular",
         }
 });

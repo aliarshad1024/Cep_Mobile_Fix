@@ -8,14 +8,13 @@ import {
   Share,
   TextInput,
 } from "react-native";
-import { Feather, SimpleLineIcons } from "@expo/vector-icons";
 import Footer from "../../components/Footer";
 import { logout, changeThemeColor } from "../../redux/actions/authActions";
 import { connect } from "react-redux";
 import { useFonts } from "expo-font";
 import { Rubik_400Regular } from "@expo-google-fonts/rubik";
 import * as Linking from "expo-linking";
-import { Ionicons,MaterialIcons } from "@expo/vector-icons";
+// import { Ionicons,MaterialIcons } from "@expo/vector-icons";
 import url from "../../utils/URL";
 import Modal from "react-native-modal";
 import { baseUrl } from "../../constants/global";
@@ -26,7 +25,6 @@ const Settings = (props) => {
   const [confirmDeletion, setConfirmDeletion] = useState(false);
   const [confirm, setConfirm] = useState("");
 
-
   useEffect(() => {
     if (!props.auth.isAuthenticated) {
       props.navigation.navigate("SignIn");
@@ -35,8 +33,6 @@ const Settings = (props) => {
   let [fontsLoaded] = useFonts({
     Rubik_400Regular,
   });
-
-
 
   const deleteAccount = async (userId) => {
     let user = await AsyncStorage.getItem("persist:auth");
@@ -59,12 +55,11 @@ const Settings = (props) => {
     })
       .then((res) => res.json())
       .then((response) => {
-       
         setConfirmDeletion(false);
         props.logout();
-      }).catch((e) => console.log("Error",e));
+      })
+      .catch((e) => console.log("Error", e));
   };
-
 
   return (
     <View style={{ height: "100%", backgroundColor: "white" }}>
@@ -84,15 +79,14 @@ const Settings = (props) => {
         >
           <View style={{ flexDirection: "row", alignItems: "center" }}>
             <TouchableOpacity onPress={() => props.navigation.goBack()}>
-              <Feather name="arrow-left" size={24} color="#FFF" />
+              {/* <Feather name="arrow-left" size={24} color="#FFF" /> */}
             </TouchableOpacity>
             <Text
               style={{
                 marginLeft: 20,
                 color: "#FFF",
                 fontSize: 18,
-                fontWeight: 500,
-                fontFamily: "Rubik_400Regular",
+                fontWeight: "500",                fontFamily: "Rubik_400Regular",
               }}
             >
               Settings
@@ -122,8 +116,7 @@ const Settings = (props) => {
           <Text
             style={{
               fontSize: 16,
-              fontWeight: 500,
-              marginTop: 10,
+              fontWeight: "500",              marginTop: 10,
               color: "white",
               fontFamily: "Rubik_400Regular",
             }}
@@ -152,8 +145,7 @@ const Settings = (props) => {
         >
           <Text
             style={{
-              fontWeight: 600,
-              fontSize: 20,
+              fontWeight: "600",              fontSize: 20,
               fontFamily: "Rubik_400Regular",
               color: "rgba(24, 24, 24, 1)",
             }}
@@ -183,16 +175,15 @@ const Settings = (props) => {
               alignItems: "center",
             }}
           >
-            <Ionicons
+            {/* <Ionicons
               name="color-palette-outline"
               size={24}
               color={props.auth.themeMainColor}
-            />
+            /> */}
             <Text
               style={{
                 fontSize: 14,
-                fontWeight: 500,
-                marginLeft: 20,
+                fontWeight: "500",                marginLeft: 20,
                 fontFamily: "Rubik_400Regular",
               }}
             >
@@ -225,16 +216,15 @@ const Settings = (props) => {
             source={require("../../assets/icons/support.png")}
             style={{ width: 24, height: 24 }}
           /> */}
-           <MaterialIcons
+          {/* <MaterialIcons
             name="support-agent"
             size={24}
             color={props.auth.themeMainColor}
-          />
+          /> */}
           <Text
             style={{
               fontSize: 14,
-              fontWeight: 500,
-              marginLeft: 20,
+              fontWeight: "600",              marginLeft: 20,
               fontFamily: "Rubik_400Regular",
             }}
           >
@@ -245,17 +235,17 @@ const Settings = (props) => {
         <TouchableOpacity
           onPress={() =>
             Share.share({
-              message: "Check out this awesome app: https://competitiveexaminationpakistan.com/",
+              message:
+                "Check out this awesome app: https://competitiveexaminationpakistan.com/",
             })
           }
           style={{ flexDirection: "row", marginBottom: 18 }}
         >
-          <Feather name="share-2" size={24} color={props.auth.themeMainColor} />
+          {/* <Feather name="share-2" size={24} color={props.auth.themeMainColor} /> */}
           <Text
             style={{
               fontSize: 14,
-              fontWeight: 500,
-              marginLeft: 20,
+              fontWeight: "600",              marginLeft: 20,
               fontFamily: "Rubik_400Regular",
             }}
           >
@@ -267,17 +257,16 @@ const Settings = (props) => {
           onPress={() => props.navigation.navigate("AboutUs")}
           style={{ flexDirection: "row", marginBottom: 18 }}
         >
-          <SimpleLineIcons
+          {/* <SimpleLineIcons
             name="question"
             size={20}
             color={props.auth.themeMainColor}
-          />
+          /> */}
 
           <Text
             style={{
               fontSize: 14,
-              fontWeight: 500,
-              marginLeft: 22,
+              fontWeight: "600",              marginLeft: 22,
               fontFamily: "Rubik_400Regular",
             }}
           >
@@ -289,11 +278,11 @@ const Settings = (props) => {
           onPress={() => props.logout()}
           style={{ flexDirection: "row", marginBottom: 18 }}
         >
-          <Feather name="log-out" size={24} color="rgba(238, 85, 0, 1)" />
+          {/* <Feather name="log-out" size={24} color="rgba(238, 85, 0, 1)" /> */}
           <Text
             style={{
               fontSize: 14,
-              fontWeight: 500,
+              fontWeight: "600",
               marginLeft: 20,
               fontFamily: "Rubik_400Regular",
             }}
@@ -313,15 +302,15 @@ const Settings = (props) => {
             borderRadius: 20,
           }}
         >
-          <MaterialIcons
+          {/* <MaterialIcons
             name="delete-outline"
             size={24}
             color="rgba(238, 85, 0, 1)"
-          />
+          /> */}
           <Text
             style={{
               fontSize: 14,
-              fontWeight: 500,
+              fontWeight: "600",
               marginLeft: 5,
               fontFamily: "Rubik_400Regular",
             }}
@@ -346,7 +335,7 @@ const Settings = (props) => {
             <Text
               style={{
                 fontSize: 18,
-                fontWeight: 600,
+                fontWeight: "600",
                 marginBottom: 30,
               }}
             >
@@ -419,7 +408,7 @@ const Settings = (props) => {
                     mainColor: "#00ba5f",
                     secondaryColor: "#FF8F0F",
                   });
-                  setModalVisible(false)
+                  setModalVisible(false);
                 }}
               >
                 <View
@@ -434,10 +423,11 @@ const Settings = (props) => {
             </View>
 
             <View
-              style={{ 
-                flexDirection: "row", 
+              style={{
+                flexDirection: "row",
                 justifyContent: "space-around",
-                marginVertical:15 }}
+                marginVertical: 15,
+              }}
             >
               <TouchableOpacity
                 onPress={() => {
@@ -548,7 +538,7 @@ const Settings = (props) => {
             <Text
               style={{
                 fontSize: 18,
-                fontWeight: 600,
+                fontWeight: "600",
                 marginBottom: 15,
                 textAlign: "center",
               }}

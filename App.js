@@ -9,13 +9,11 @@ import SplashScreen from 'react-native-splash-screen';
 
 import { useSelector } from "react-redux";
 import { LogLevel, OneSignal } from 'react-native-onesignal';
-import mobileAds, { useRewardedInterstitialAd } from 'react-native-google-mobile-ads';
-import { AppOpenAd, TestIds } from 'react-native-google-mobile-ads';
 import VersionCheck from 'react-native-version-check';
 import { Linking, Platform, Alert } from 'react-native';
 
 const NavigationDecider = () => {
-  const { auth } = useSelector((state) => state);
+  const auth = useSelector((state) => state.auth);
 
   return (
     <>
@@ -25,11 +23,6 @@ const NavigationDecider = () => {
 };
 
 export default function App() {
-  const appOpenAd = AppOpenAd.createForAdRequest(TestIds.APP_OPEN, {
-    requestNonPersonalizedAdsOnly: true,
-    keywords: ['fashion', 'clothing'],
-  });
-
   OneSignal.initialize("76b207cd-65b5-4bbc-a867-9cc98e4c0620");
   OneSignal.Debug.setLogLevel(LogLevel.Verbose);
   OneSignal.Notifications.requestPermission(true);

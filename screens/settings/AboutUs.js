@@ -1,6 +1,6 @@
 import { View, Text, Image, TouchableOpacity, use } from "react-native";
 import React from "react";
-import { Feather } from "@expo/vector-icons";
+// import { Feather } from "@expo/vector-icons";
 import { Rubik_400Regular } from "@expo-google-fonts/rubik";
 import { useFonts } from "expo-font";
 
@@ -15,7 +15,7 @@ const AboutUs = (props) => {
           style={{ left: 20 }}
           onPress={() => props.navigation.goBack()}
         >
-          <Feather name="arrow-left" size={24} color="black" />
+          {/* <Feather name="arrow-left" size={24} color="black" /> */}
         </TouchableOpacity>
         <Text
           style={{

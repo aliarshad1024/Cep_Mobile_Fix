@@ -1,6 +1,6 @@
 import { Image, ScrollView, View, TouchableOpacity, Text } from "react-native";
 import React from "react";
-import { Feather, Ionicons } from "@expo/vector-icons";
+// import { Feather, Ionicons } from "@expo/vector-icons";
 import { useFonts } from "expo-font";
 import { Rubik_400Regular } from "@expo-google-fonts/rubik";
 import { connect } from "react-redux";
@@ -32,13 +32,13 @@ const QuizResult = (props) => {
       >
         <View style={{ flexDirection: "row", alignItems: "center" }}>
           <TouchableOpacity onPress={() => props.navigation.goBack()}>
-            <Feather name="arrow-left" size={24} color="black" />
+            {/* <Feather name="arrow-left" size={24} color="black" /> */}
           </TouchableOpacity>
           <Text
             style={{
               marginLeft: 20,
               fontSize: 18,
-              fontWeight: 500,
+              fontWeight: "500",
               fontFamily: "Rubik_400Regular",
             }}
           >
@@ -165,7 +165,7 @@ const QuizResult = (props) => {
           style={{
             color: "black",
             fontSize: 16,
-            fontWeight: 700,
+            fontWeight: "700",
             width: "50%",
             textAlignVertical: "center",
             fontFamily: "Rubik_400Regular",
@@ -423,12 +423,12 @@ const QuizResult = (props) => {
             resizeMode="cover"
             source={require("../assets/vector.png")}
           /> */}
-        <Ionicons name="reload-sharp" size={24} color="white" />
+        {/* <Ionicons name="reload-sharp" size={24} color="white" /> */}
         <Text
           style={{
             fontSize: 16,
             color: "#F2F2F2",
-            fontWeight: 700,
+            fontWeight: "700",
             textAlign: "center",
             marginLeft: 15,
             fontFamily: "Rubik_400Regular",
@@ -472,7 +472,7 @@ const QuizResult = (props) => {
             style={{
               fontSize: 16,
               color: "#F2F2F2",
-              fontWeight: 700,
+              fontWeight: "700",
               textAlign: "center",
               fontFamily: "Rubik_400Regular",
             }}

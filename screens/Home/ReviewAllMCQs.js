@@ -19,8 +19,7 @@ import { useFonts } from "expo-font";
 import { Rubik_400Regular } from "@expo-google-fonts/rubik";
 import MCQItem from "../../components/MCQItem";
 import { baseUrl } from "../../constants/global";
-import { Fontisto, MaterialCommunityIcons } from "@expo/vector-icons";
-import {BannerAd, BannerAdSize, RewardedAd, TestIds, AdEventType, RewardedAdEventType, RewardedInterstitialAd, useRewardedInterstitialAd, useInterstitialAd} from 'react-native-google-mobile-ads';
+// import { Fontisto, MaterialCommunityIcons } from "@expo/vector-icons";
 
 
 
@@ -142,7 +141,7 @@ const ReviewAllMCQs = (props) => {
             marginTop: 140,
             fontSize: 16,
             fontFamily: "Rubik_400Regular",
-            fontWeight: 400,
+            fontWeight: "400",
           }}
         >
           Coming Soon
@@ -196,7 +195,7 @@ const ReviewAllMCQs = (props) => {
                   textAlign: "center",
                   color: "#FFFF",
                   width:'100%',
-                  fontWeight: 600,
+                  fontWeight: "600",
                   paddingLeft:20,
                   fontSize: 18,
                   marginLeft:10,
@@ -216,7 +215,7 @@ const ReviewAllMCQs = (props) => {
                   color: "#181818",
                   textAlign: "center",
                   marginVertical: 10,
-                  fontWeight: 500,
+                  fontWeight: "500",
                   fontFamily: "Rubik_400Regular",
                 }}
               >
@@ -225,13 +224,13 @@ const ReviewAllMCQs = (props) => {
               <View style={{
                 flexDirection:'column'
               }}>
-              <Fontisto
+              {/* <Fontisto
                 name="quote-a-right"
                 size={8}
                 style={{
                  color:"#FF8F0F",
                 }}
-             />
+             /> */}
               
               <Text
                 style={{
@@ -246,14 +245,14 @@ const ReviewAllMCQs = (props) => {
               >
                  {details.detail}
               </Text>
-              <Fontisto
+              {/* <Fontisto
                 name="quote-a-left"
                 size={8}
                 style={{
                  color:"#FF8F0F",
                  alignSelf:'flex-end'
                 }}
-             />
+             /> */}
               
               </View>
 

@@ -8,7 +8,7 @@ import {
   Alert,
   ScrollView,
 } from "react-native";
-import { Feather, MaterialIcons } from "@expo/vector-icons";
+// import { Feather, MaterialIcons } from "@expo/vector-icons";
 import { Image } from "react-native";
 import { Checkbox } from "expo-checkbox";
 import ErrorAlert from "../../components/ErrorAlert";
@@ -144,14 +144,14 @@ function SignUp(props) {
             style={{ marginLeft: 20 }}
             onPress={() => props.navigation.goBack()}
           >
-            <Feather name="arrow-left" size={24} color="white" />
+            {/* <Feather name="arrow-left" size={24} color="white" /> */}
           </TouchableOpacity>
         </View>
         <View style={{ flex: 2, paddingHorizontal: 20 }}>
           <Text
             style={{
               fontSize: 22,
-              fontWeight: 500,
+              fontWeight: "500",
               fontFamily: "Rubik_400Regular",
             }}
           >
@@ -180,11 +180,11 @@ function SignUp(props) {
               alignItems: "center",
             }}
           >
-            <MaterialIcons
+            {/* <MaterialIcons
               name="person"
               size={24}
               color="rgba(204, 204, 204, 1)"
-            />
+            /> */}
             <TextInput
               placeholder="Full Name"
               value={fullName}
@@ -209,11 +209,11 @@ function SignUp(props) {
               alignItems: "center",
             }}
           >
-            <MaterialIcons
+            {/* <MaterialIcons
               name="email"
               size={24}
               color="rgba(204, 204, 204, 1)"
-            />
+            /> */}
             <TextInput
               autoCapitalize="none"
               placeholder="Email"
@@ -239,11 +239,11 @@ function SignUp(props) {
               alignItems: "center",
             }}
           >
-            <MaterialIcons
+            {/* <MaterialIcons
               name="phone"
               size={24}
               color="rgba(204, 204, 204, 1)"
-            />
+            /> */}
              <Text
               style={{
                 marginLeft: 12,
@@ -278,11 +278,11 @@ function SignUp(props) {
               alignItems: "center",
             }}
           >
-            <MaterialIcons
+            {/* <MaterialIcons
               name="lock"
               size={24}
               color="rgba(204, 204, 204, 1)"
-            />
+            /> */}
             <TextInput
               placeholder="Password"
               value={password}
@@ -303,11 +303,11 @@ function SignUp(props) {
               style={{ flex: 1, marginLeft: 10 }}
             />
             <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
-              <MaterialIcons
+              {/* <MaterialIcons
                 name={showPassword ? "visibility" : "visibility-off"}
                 size={24}
                 color="gray"
-              />
+              /> */}
             </TouchableOpacity>
           </View>
           <View
@@ -322,11 +322,11 @@ function SignUp(props) {
               alignItems: "center",
             }}
           >
-            <MaterialIcons
+            {/* <MaterialIcons
               name="lock"
               size={24}
               color="rgba(204, 204, 204, 1)"
-            />
+            /> */}
             <TextInput
               placeholder="Retype Password"
               value={retypePassword}
@@ -343,11 +343,11 @@ function SignUp(props) {
               style={{ flex: 1, marginLeft: 10 }}
             />
             <TouchableOpacity onPress={() => setShowRetypePassword(!showRetypePassword)}>
-              <MaterialIcons
+              {/* <MaterialIcons
                 name={showRetypePassword ? "visibility" : "visibility-off"}
                 size={24}
                 color="gray"
-              />
+              /> */}
             </TouchableOpacity>
           </View>
           <Text style={{
@@ -412,7 +412,7 @@ function SignUp(props) {
             <Text
               style={{
                 color: "white",
-                fontWeight: 600,
+                fontWeight: "600",
                 fontSize: 14,
                 fontFamily: "Rubik_400Regular",
               }}
@@ -484,7 +484,7 @@ function SignUp(props) {
               textAlign: "center",
               color: "rgba(139, 139, 139, 1)",
               marginTop: 10,
-              fontWeight: 500,
+              fontWeight: "500",
               color: "rgba(139, 139, 139, 1)",
               fontFamily: "Rubik_400Regular",
             }}
@@ -521,7 +521,7 @@ function SignUp(props) {
                 style={{
                   color: props.auth.themeMainColor,
                   marginLeft: 5,
-                  fontWeight: 600,
+                  fontWeight: "600",
                   fontFamily: "Rubik_400Regular",
                 }}
               >

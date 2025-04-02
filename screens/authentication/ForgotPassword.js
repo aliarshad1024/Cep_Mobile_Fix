@@ -7,7 +7,7 @@ import {
   SafeAreaView,
   Alert
 } from "react-native";
-import { Feather, MaterialIcons } from "@expo/vector-icons";
+// import { Feather, MaterialIcons } from "@expo/vector-icons";
 import { useFonts } from "expo-font";
 
 import { Image } from "react-native";
@@ -35,42 +35,42 @@ function ForgotPassword(props) {
 
   let logo;
 
-  switch (props.auth.themeMainColor) {
-    case "#0E81B4":
-      logo = require("../../assets/icons/cep0e81b4.png");
+  // switch (props.auth.themeMainColor) {
+  //   case "#0E81B4":
+  //     logo = require("../../assets/icons/cep0e81b4.png");
 
-      break;
-    case "#00BA60":
-      logo = require("../../assets/icons/cep00ba60.png");
+  //     break;
+  //   case "#00BA60":
+  //     logo = require("../../assets/icons/cep00ba60.png");
 
-      break;
-    case "#41CBF6":
-      logo = require("../../assets/icons/cep41cbf6.png");
+  //     break;
+  //   case "#41CBF6":
+  //     logo = require("../../assets/icons/cep41cbf6.png");
 
-      break;
-    case "#006769":
-      logo = require("../../assets/icons/cep006769.png");
+  //     break;
+  //   case "#006769":
+  //     logo = require("../../assets/icons/cep006769.png");
 
-      break;
-    case "#07173B":
-      logo = require("../../assets/icons/cep07173b.png");
+  //     break;
+  //   case "#07173B":
+  //     logo = require("../../assets/icons/cep07173b.png");
 
-      break;
-    case "#CC84DE":
-      logo = require("../../assets/icons/cepcc84de.png");
+  //     break;
+  //   case "#CC84DE":
+  //     logo = require("../../assets/icons/cepcc84de.png");
 
-      break;
-    case "#95C0B1":
-      logo = require("../../assets/icons/cep95c0b1.png");
+  //     break;
+  //   case "#95C0B1":
+  //     logo = require("../../assets/icons/cep95c0b1.png");
 
-      break;
-    case "#A4443C":
-      logo = require("../../assets/icons/cepa4443c.png");
+  //     break;
+  //   case "#A4443C":
+  //     logo = require("../../assets/icons/cepa4443c.png");
 
-      break;
-    default:
-      logo = require("../../assets/icons/cep0e81b4.png");
-  }
+  //     break;
+  //   default:
+  //     logo = require("../../assets/icons/cep0e81b4.png");
+  // }
 
 
   
@@ -157,7 +157,7 @@ function ForgotPassword(props) {
           style={{ left: 20 }}
           onPress={() => props.navigation.goBack()}
         >
-          <Feather name="arrow-left" size={24} color="white" />
+          {/* <Feather name="arrow-left" size={24} color="white" /> */}
         </TouchableOpacity>
       </View>
       <View style={{ flex: 2, paddingHorizontal: 20, marginVertical: 25 }}>
@@ -192,11 +192,11 @@ function ForgotPassword(props) {
             alignItems: "center",
           }}
         >
-          <MaterialIcons
+          {/* <MaterialIcons
             name="email"
             size={24}
             color="rgba(204, 204, 204, 1)"
-          />
+          /> */}
           
           <TextInput
             placeholder="Email Address"

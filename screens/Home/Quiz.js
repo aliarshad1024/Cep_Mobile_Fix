@@ -1,6 +1,6 @@
 import { View, Text, TouchableOpacity, FlatList, Alert } from "react-native";
 import React, { useState, useEffect, useCallback } from "react";
-import { Feather } from "@expo/vector-icons";
+// import { Feather } from "@expo/vector-icons";
 import ProgressBar from "../../components/ProgressBar";
 import Pagination from "../../components/Pagination";
 import url from "../../utils/URL";
@@ -13,7 +13,6 @@ import { Rubik_400Regular } from "@expo-google-fonts/rubik";
 import { useFocusEffect } from "@react-navigation/native";
 import QuizItem from "../../components/QuizItem";
 import { admobInterestial, baseUrl } from "../../constants/global";
-import {BannerAd, BannerAdSize, RewardedAd, TestIds, AdEventType, RewardedAdEventType, RewardedInterstitialAd, useRewardedInterstitialAd, useInterstitialAd} from 'react-native-google-mobile-ads';
 import PastpapersQuizItem from "../../components/PastpapersQuizItem";
 import { ScrollView } from "react-native-gesture-handler";
 import { OptimizedFlatList } from "react-native-optimized-flatlist";
@@ -35,14 +34,6 @@ const Quiz = (props) => {
   const [totalCorrect, setTotalCorrect] = useState(0);
   const [totalWrong, setTotalWrong] = useState(0);
   const [page, setPage] = useState(1);
-
-
-  
-
-  const { isLoaded, isClosed, load, show }  = useInterstitialAd(admobInterestial, {
-    requestNonPersonalizedAdsOnly: true,
-  });
-  
 
 
   
@@ -399,13 +390,13 @@ const updatePageSkipAd = (type, p) => {
           style={{ marginRight: 20 }}
           onPress={() => props.navigation.goBack()}
         >
-          <Feather name="arrow-left" size={24} color="black" />
+          {/* <Feather name="arrow-left" size={24} color="black" /> */}
         </TouchableOpacity>
         <Text
           style={{
             fontSize: 18,
             color: "black",
-            fontWeight: 500,
+            fontWeight: "500",
             marginVertical: 10,
             fontFamily: "Rubik_400Regular",
           }}
@@ -418,7 +409,7 @@ const updatePageSkipAd = (type, p) => {
         style={{
           fontSize: 20,
           color: "black",
-          fontWeight: 400,
+          fontWeight: "400",
           marginTop: 10,
           fontFamily: "Rubik_400Regular",
         }}
@@ -430,7 +421,7 @@ const updatePageSkipAd = (type, p) => {
         style={{
           fontSize: 14,
           color: "#181818",
-          fontWeight: 400,
+          fontWeight: "400",
           marginVertical: 10,
           fontFamily: "Rubik_400Regular",
         }}
@@ -446,7 +437,7 @@ const updatePageSkipAd = (type, p) => {
             marginTop: 140,
             fontSize: 16,
             fontFamily: "Rubik_400Regular",
-            fontWeight: 400,
+            fontWeight: "400",
           }}
         >
           Coming Soon
@@ -525,7 +516,7 @@ const updatePageSkipAd = (type, p) => {
                           style={{
                             color: "white",
                             fontSize: 15,
-                            fontWeight: 600,
+                            fontWeight: "600",
                             textAlign: "center",
                           }}
                         >

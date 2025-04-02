@@ -1,8 +1,32 @@
 {
-  "name": "CEP",
-  "displayName": "CEP",
-  "react-native-google-mobile-ads": {
-    "android_app_id": "ca-app-pub-6153295999412289~8174193474",
-    "ios_app_id": "ca-app-pub-6153295999412289~8174193474"
+  "expo": {
+    "name": "CEP",
+    "slug": "cep",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.aliarshad1024.cep"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.aliarshad1024.cep"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    }
   }
 }

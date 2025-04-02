@@ -1,6 +1,5 @@
 import { View, Text, TouchableOpacity, FlatList, Image,Alert } from "react-native";
 import React, { useState, useEffect, useCallback } from "react";
-import { AntDesign, Feather, FontAwesome } from "@expo/vector-icons";
 import Modal from "react-native-modal";
 import { WebView } from "react-native-webview";
 import Loading from "../../components/Loading";
@@ -8,13 +7,12 @@ import url from "../../utils/URL";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { connect } from "react-redux";
 import { logout } from "../../redux/actions/authActions";
-import { Fontisto, MaterialCommunityIcons } from "@expo/vector-icons";
+// import { Fontisto, MaterialCommunityIcons } from "@expo/vector-icons";
 import Pagination from "../../components/Pagination";
 import { useFonts } from "expo-font";
 import { Rubik_400Regular } from "@expo-google-fonts/rubik";
 import MCQItem from "../../components/MCQItem";
-import { admobInterestial, baseUrl } from "../../constants/global";
-import {BannerAd, BannerAdSize, RewardedAd, TestIds, AdEventType, RewardedAdEventType, RewardedInterstitialAd, useRewardedInterstitialAd, useInterstitialAd} from 'react-native-google-mobile-ads';
+import { baseUrl } from "../../constants/global";
 
 
 const MCQs = (props) => {
@@ -27,22 +25,15 @@ const MCQs = (props) => {
   const [refreshing, setRefreshing] = useState(false);
   const [mcqs, setMcqs] = useState([]);
   const [displayMcqs, setDisplayMcqs] = useState([]);
-  const [totalMCQs, setTotalMCQs] = useState(10);
+  const [totalQuestions, setTotalQuestions] = useState(0);
 
-
-
-  const [type, setType] = useState()
-  const [p, setP] = useState()
-
-
-
-
-  const { isLoaded, isClosed, load, show }  = useInterstitialAd(admobInterestial, {
-    requestNonPersonalizedAdsOnly: true,
+  let [fontsLoaded] = useFonts({
+    Rubik_400Regular,
   });
-  
-  
 
+  useEffect(() => {
+    getMcqs();
+  }, []);
 
   useEffect(()=>{
     if(isClosed)
@@ -83,67 +74,46 @@ const MCQs = (props) => {
 
 
 
-  useEffect(() => {
-    getMCQs(page);
-  }, [page]);
-
-  let [fontsLoaded] = useFonts({
-    Rubik_400Regular,
-  });
-
-
-  const getMCQs = async (offset) => {
-    setLoading(true);
+  const getMcqs = async () => {
     let user = await AsyncStorage.getItem("persist:auth");
     let token = JSON.parse(user).token.slice(1, -1);
-    let data = {
-      subjectid: props.route.params.subjectid,
-      chapterid: props.route.params.chapterid,
-      offset: (offset-1) * 10,
-      userid: props.auth.user.id,
-      sessionid: Math.trunc(Date.now() / 1000),
-    };
-    const searchParams = new URLSearchParams();
-    for (const key in data) {
-      searchParams.append(key, data[key]);
+
+    if (token === "ul") {
+      user = await AsyncStorage.getItem("persist:auth");
+      token = JSON.parse(user).token.slice(1, -1);
     }
-    fetch(`${baseUrl}/api/quiz/getrevision`, {
-      method: "POST",
+
+    fetch(`${baseUrl}/api/mcqs/show`, {
+      method: "GET",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/x-www-form-urlencoded",
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${props.auth.token}`,
       },
-      body: searchParams.toString(),
     })
       .then((res) => res.json())
       .then((data) => {
-         console.log("err "+JSON.stringify(data)) 
-        if (data?.status === "success") {
-          if (data.data) {
-            setMcqs([...mcqs, ...data.data]);
-            setDisplayMcqs(data.data);
-          }
+        if (data.message === "Token has expired") {
+          Alert.alert("Session Token Expired!", "Kindly login again!", [
+            {
+              text: "Ok",
+              onPress: () => {
+                props.logout();
+              },
+            },
+          ]);
+        } else if (data?.status === "success") {
+          setMcqs(data.data);
+          setDisplayMcqs(data.data);
+          setTotalQuestions(data.data.length);
           setLoading(false);
           setRefreshing(false);
-          setLoadingData(false);
-        } else {
-          Alert.alert("Check your internet connection and try again!", "", [
-            { text: "Try Again", onPress: () => getMCQs(1) },
-          ]);
         }
       })
       .catch((e) => {
-        Alert.alert("Session Token Expired", "Kindly login again!", [
-          {
-            text: "Ok",
-            onPress: () => {
-             // props.navigation.navigate("SignIn");
-              props.logout();
-            },
-          },
+        Alert.alert("Kindly, check your internet connection", "", [
+          { text: "Try Again", onPress: () => getMcqs() },
         ]);
-        console.log("token Error:"+e)
       });
   };
 
@@ -154,8 +124,6 @@ const delay = ms => new Promise(
   
   
   const preupdatePage=async(type, p)=>{
-        setType(type)
-        setP(p)
         if(page%4==0 && isLoaded){
           show()
         }else{
@@ -174,7 +142,7 @@ const delay = ms => new Promise(
         if (page < (Math.trunc(props.route.params.totalQuestions / 10)+1)) {
           setPage(page + 1);
           setLoadingData(true);
-          getMCQs(page + 1);
+          getMcqs();
         }
       } else {
         setPage(page + 1);
@@ -188,7 +156,7 @@ const delay = ms => new Promise(
     } else {
       setPage(p)
       setLoadingData(true);
-      getMCQs(p);
+      getMcqs();
     }
   };
 
@@ -203,7 +171,7 @@ const delay = ms => new Promise(
           setLoadingData(true);
           console.log("page "+page)
     
-          getMCQs(page + 1);
+          getMcqs();
         }
       } else {
         setPage(page + 1);
@@ -217,7 +185,7 @@ const delay = ms => new Promise(
     } else {
       setPage(p)
       setLoadingData(true);
-      getMCQs(p);
+      getMcqs();
     }
   }; 
 
@@ -241,14 +209,14 @@ const delay = ms => new Promise(
           style={{ marginRight: 20 }}
           onPress={() => props.navigation.goBack()}
         >
-          <Feather name="arrow-left" size={24} color="black" />
+          {/* <Feather name="arrow-left" size={24} color="black" /> */}
         </TouchableOpacity>
         <Text
           style={{
             textAlign: "center",
             marginRight: 20,
             fontSize: 18,
-            fontWeight: 500,
+            fontWeight: "500",
             fontFamily: "Rubik_400Regular",
           }}
           selectable={false}
@@ -264,7 +232,7 @@ const delay = ms => new Promise(
           fontFamily: "Rubik_400Regular",
         }}
       >
-        Showing results “{displayMcqs.length}”
+        Showing results "{displayMcqs.length}"
       </Text>
       {mcqs.length === 0 ? (
         <Text
@@ -274,7 +242,7 @@ const delay = ms => new Promise(
             marginTop: 140,
             fontSize: 16,
             fontFamily: "Rubik_400Regular",
-            fontWeight: 400,
+            fontWeight: "400",
           }}
         >
           Coming Soon
@@ -289,11 +257,11 @@ const delay = ms => new Promise(
               numColumns={1}
               contentContainerStyle={{ paddingBottom: 50 }}
               showsVerticalScrollIndicator={false}
-              // onRefresh={() => {
-              //   setRefreshing(true);
-              //   getMCQs(1);
-              // }}
-              // refreshing={refreshing}
+              onRefresh={() => {
+                setRefreshing(true);
+                getMcqs();
+              }}
+              refreshing={refreshing}
               renderItem={renderMCQItem}
             />
           )}
@@ -342,7 +310,7 @@ const delay = ms => new Promise(
                   textAlign: "center",
                   color: "#FFFF",
                   width:'100%',
-                  fontWeight: 600,
+                  fontWeight: "600",
                   paddingLeft:20,
                   fontSize: 18,
                   marginLeft:10,
@@ -358,13 +326,13 @@ const delay = ms => new Promise(
             <View style={{
                 flexDirection:'column'
               }}>
-              <Fontisto
+              {/* <Fontisto
                 name="quote-a-right"
                 size={8}
                 style={{
                  color:"#FF8F0F",
                 }}
-             />
+             /> */}
               
               <Text
                 style={{
@@ -379,14 +347,14 @@ const delay = ms => new Promise(
               >
                  {details.detail}
               </Text>
-              <Fontisto
+              {/* <Fontisto
                 name="quote-a-left"
                 size={8}
                 style={{
                  color:"#FF8F0F",
                  alignSelf:'flex-end'
                 }}
-             />
+             /> */}
               
               </View>
                

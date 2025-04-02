@@ -1,6 +1,6 @@
 import { View, Text, TouchableOpacity, FlatList, Alert } from "react-native";
 import React, { useState, useEffect, useCallback } from "react";
-import { Feather } from "@expo/vector-icons";
+// import { Feather } from "@expo/vector-icons";
 import ProgressBar from "../../components/ProgressBar";
 import url from "../../utils/URL";
 import Loading from "../../components/Loading";
@@ -129,7 +129,7 @@ const CustomizeQuizQuestions = (props) => {
           style={{ marginRight: 20 }}
           onPress={() => props.navigation.goBack()}
         >
-          <Feather name="arrow-left" size={24} color="black" />
+          {/* <Feather name="arrow-left" size={24} color="black" /> */}
         </TouchableOpacity>
         <Text style={{ textAlign: "center", marginRight: 20, fontSize: 18 }}>
           Customize Quiz
@@ -139,7 +139,7 @@ const CustomizeQuizQuestions = (props) => {
         style={{
           fontSize: 20,
           color: "black",
-          fontWeight: 400,
+          fontWeight: "400",
           margin: 10,
           fontFamily: "Rubik_400Regular",
         }}
@@ -155,7 +155,7 @@ const CustomizeQuizQuestions = (props) => {
             marginTop: 140,
             fontSize: 16,
             fontFamily: "Rubik_400Regular",
-            fontWeight: 400,
+            fontWeight: "400",
           }}
         >
           Coming Soon
@@ -178,7 +178,7 @@ const CustomizeQuizQuestions = (props) => {
                 key={index}
               >
                 <Text
-                  style={{ fontSize: 16, fontWeight: 500, marginBottom: 8 }}
+                  style={{ fontSize: 16, fontWeight: "500", marginBottom: 8 }}
                   selectable={false}
                 >
                   <Text
@@ -191,7 +191,7 @@ const CustomizeQuizQuestions = (props) => {
                 <Text
                   style={{
                     fontSize: 16,
-                    fontWeight: 500,
+                    fontWeight: "500",
                     marginBottom: 10,
                     fontWeight: "bold",
                   }}
@@ -312,7 +312,7 @@ const CustomizeQuizQuestions = (props) => {
                   style={{
                     color: "white",
                     fontSize: 15,
-                    fontWeight: 600,
+                    fontWeight: "600",
                     textAlign: "center",
                   }}
                 >

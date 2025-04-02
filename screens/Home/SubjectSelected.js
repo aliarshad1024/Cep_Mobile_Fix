@@ -1,6 +1,6 @@
 import { View, Text, TouchableOpacity, Image } from "react-native";
 import React, { useState, useCallback, useEffect } from "react";
-import { Feather } from "@expo/vector-icons";
+// import { Feather } from "@expo/vector-icons";
 import Footer from "../../components/Footer";
 import SelectChapter from "./SelectChapter";
 import AttemptAllMCQs from "./AttemptAllMCQs";
@@ -10,9 +10,7 @@ import { useFonts } from "expo-font";
 import { Rubik_400Regular } from "@expo-google-fonts/rubik";
 import { useFocusEffect } from "@react-navigation/native";
 import { connect } from "react-redux";
-import { admobInterestial, baseUrl } from "../../constants/global";
-import {TestIds, useInterstitialAd, InterstitialAd, AdEventType} from 'react-native-google-mobile-ads';
-
+import { baseUrl } from "../../constants/global";
 
 const SubjectSelected = (props) => {
   const [subject, setSubject] = useState(props.route.params.subject);
@@ -28,69 +26,9 @@ const SubjectSelected = (props) => {
   const [totalCorrect, setTotalCorrect] = useState(0);
   const [totalWrong, setTotalWrong] = useState(0);
 
-
-
-  var interestial_loaded=false;
-  var interestial_shown =false;
-
-
-
-  
-  const [type, setType] = useState()
-  const [p, setP] = useState()
-
-
-
-
-  const { isLoaded, isClosed, load, show }  = useInterstitialAd(admobInterestial, {
-    requestNonPersonalizedAdsOnly: true,
+  let [fontsLoaded] = useFonts({
+    Rubik_400Regular,
   });
-  
-
-
-  const interstitial = InterstitialAd.createForAdRequest(admobInterestial, {
-    requestNonPersonalizedAdsOnly: false,
-    keywords: ['fashion', 'clothing'],
-  });
-  
-
-
-  
-  useEffect(() => {
-    const unsubscribe = interstitial.addAdEventListener(AdEventType.LOADED, () => {
-      interestial_loaded= true;
-      interestial_shown= false
-    });
-
-    const relaod_admob = interstitial.addAdEventListener(AdEventType.CLOSED, () => {
-      interestial_loaded= true;
-      interestial_shown= false
-    });
-    interestial_shown = false
-    interstitial_loaded = false 
-    interstitial.load();
-    unsubscribe;
-    relaod_admob;
-  }, []);
-
-
-
-  useEffect(()=>{
-    if(isClosed)
-      updatePage()
-  },[isClosed])
-
-
-
-  useEffect(() => {
-    if(page%3==0 && !isLoaded){
-       load()
-    }
-  }, [page]);
-
-
-
-
 
   useFocusEffect(
     useCallback(() => {
@@ -103,55 +41,6 @@ const SubjectSelected = (props) => {
     }, [])
   );
 
-
-
-  const updatePage = () => {
-    if (type === "inc") {
-      if (page < Math.trunc(props.route.params.totalQuestions / 10)) {
-        setPage(page + 1);
-      }
-    } else if (type === "dec") {
-      if (page > 1) {
-        setPage(page - 1);
-      }
-    } else {
-      setPage(p);
-    }
-  };
-
-
-  const updatePageSkipAd = (type, p) => {
-    if (type === "inc") {
-      if (page < Math.trunc(props.route.params.totalQuestions / 10)) {
-        setPage(page + 1);
-      }
-    } else if (type === "dec") {
-      if (page > 1) {
-        setPage(page - 1);
-      }
-    } else {
-      setPage(p);
-    }
-  };
-
-
-
-  const preupdatePage=async(type, p)=>{
-    setType(type)
-    setP(p)
-    if(page%3==0 && isLoaded){
-      show()
-    }else{
-      updatePageSkipAd(type, p)
-    }
-
-
-}
-
-
-  let [fontsLoaded] = useFonts({
-    Rubik_400Regular,
-  });
   return (
     <View
       style={{
@@ -173,14 +62,14 @@ const SubjectSelected = (props) => {
             style={{ marginRight: 20 }}
             onPress={() => props.navigation.goBack()}
           >
-            <Feather name="arrow-left" size={24} color="black" />
+            {/* <Feather name="arrow-left" size={24} color="black" /> */}
           </TouchableOpacity>
           <Text
             style={{
               textAlign: "center",
               marginRight: 20,
               fontSize: 18,
-              fontWeight: 500,
+              fontWeight: "500", // ✅ Correct: Use string values
               fontFamily: "Rubik_400Regular",
             }}
             selectable={false}
@@ -212,9 +101,6 @@ const SubjectSelected = (props) => {
                 flex: 1,
               }}
               onPress={() => {
-                if(interestial_loaded && !interestial_shown){
-                  interstitial.show()
-                }
                 setPage(1);
                 setTestType(item);
               }}
@@ -224,7 +110,6 @@ const SubjectSelected = (props) => {
                 style={{
                   alignItems: "center",
                   paddingVertical: 8,
-                  // paddingHorizontal: 8,
                   borderWidth: 1.5,
                   borderColor: props.auth.themeMainColor,
                   backgroundColor:
@@ -237,7 +122,7 @@ const SubjectSelected = (props) => {
                   style={{
                     color: testType === item ? "#FFFFFF" : "#000",
                     fontSize: 12,
-                    fontWeight: 600,
+                    fontWeight: "600", // ✅ Correct: Use string values
                     fontFamily: "Rubik_400Regular",
                   }}
                   selectable={false}
@@ -276,7 +161,19 @@ const SubjectSelected = (props) => {
           all={true}
           {...props}
           page={page}
-          updatePage={preupdatePage}
+          updatePage={(type, p) => {
+            if (type === "inc") {
+              if (page < Math.trunc(props.route.params.totalQuestions / 10)) {
+                setPage(page + 1);
+              }
+            } else if (type === "dec") {
+              if (page > 1) {
+                setPage(page - 1);
+              }
+            } else {
+              setPage(p);
+            }
+          }}
           totalCorrect={totalCorrect}
           totalWrong={totalWrong}
           timeStarted={timeStarted}

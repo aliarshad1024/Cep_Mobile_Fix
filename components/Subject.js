@@ -60,7 +60,7 @@ const Subject = ({ navigation, item }) => {
           style={{
             fontSize: 12,
             color: "rgba(255, 143, 15, 1)",
-            fontWeight: 400,
+            fontWeight: "400",
             marginTop: 5,
           }}
           selectable={false}

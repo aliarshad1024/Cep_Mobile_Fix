@@ -1,6 +1,6 @@
 import { View, Text, TouchableOpacity } from "react-native";
 import React, { useState, useEffect } from "react";
-import { Feather } from "@expo/vector-icons";
+// import { Feather } from "@expo/vector-icons";
 import { WebView } from "react-native-webview";
 import { Checkbox } from "expo-checkbox";
 import Modal from "react-native-modal";
@@ -50,7 +50,7 @@ const AppIntro = (props) => {
               textAlign: "center",
               marginRight: 20,
               fontSize: 24,
-              fontWeight: 500,
+              fontWeight: "500",
             }}
           >
             App Introduction
@@ -60,7 +60,7 @@ const AppIntro = (props) => {
           style={{
             color: "rgba(130, 130, 130, 1)",
             fontSize: 20,
-            fontWeight: 500,
+            fontWeight: "500",
             marginLeft: 20,
             marginBottom: 20,
           }}

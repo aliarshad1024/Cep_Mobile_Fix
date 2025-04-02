@@ -10,7 +10,7 @@ import {
   ToastAndroid
 } from "react-native";
 import React, { useState, useEffect } from "react";
-import { Feather, FontAwesome } from "@expo/vector-icons";
+// import { Feather, FontAwesome } from "@expo/vector-icons";
 import Footer from "../components/Footer";
 import Loading from "../components/Loading";
 import url from "../utils/URL";
@@ -23,8 +23,7 @@ import * as FileSystem from "expo-file-system";
 import * as Permissions from 'expo-permissions';
 import ModalAlert from "../components/ModalAlert";
 import { clearMessage } from "../redux/actions/authActions";
-import { admobRewardedInterestial, baseUrl } from "../constants/global";
-import {BannerAd, BannerAdSize, RewardedAd, TestIds, AdEventType, RewardedAdEventType, RewardedInterstitialAd, useRewardedInterstitialAd} from 'react-native-google-mobile-ads';
+import { baseUrl } from "../constants/global";
 
 
 
@@ -42,41 +41,14 @@ const Jobs = (props) => {
 //  downloadFile(item.path, item.path.split("/").pop());
 
 
-  const { isLoaded, isClosed, load, show, isEarnedReward,error }  = useRewardedInterstitialAd(admobRewardedInterestial, {
-    requestNonPersonalizedAdsOnly: true,
-  });
-  
-
-
-  useEffect(()=>{
-    load()
-  },[isClosed])
-
-  useEffect(() => {
-  console.log("is Loaded."+isLoaded)    
-  if(!isLoaded){ 
-   load();
-   console.log("Rewarded Loading...")
- 
-  }
-  }, [load, ]);
-
-
-
-
-  useEffect(()=>{
-    if(isEarnedReward){
-      downloadFile()
-    }
-  },[isEarnedReward])
-
-
   useEffect(() => {
     getJobs();
   }, []);
+
   let [fontsLoaded] = useFonts({
     Rubik_400Regular,
   });
+
   const getJobs = async () => {
     let user = await AsyncStorage.getItem("persist:auth");
     let token = JSON.parse(user).token.slice(1, -1);
@@ -266,19 +238,6 @@ const Jobs = (props) => {
   };
 
 
-  function showRewardedAddDialog(){
-    if(isLoaded){  
-      Alert.alert("Download", "In order to download 'pdf', we need you to watch an Ad.", [
-          { text: "Watch", onPress: () => show() },
-          { text: "Don't Watch", onPress: () => 
-              
-          console.log("close") },
-      ]);
-    }else{
-      downloadFile()
-    }
-}
-
   const unbookmark = async (id) => {
     let user = await AsyncStorage.getItem("persist:auth");
     let token = JSON.parse(user).token.slice(1, -1);
@@ -330,14 +289,14 @@ const Jobs = (props) => {
             style={{ marginRight: 20 }}
             onPress={() => props.navigation.goBack()}
           >
-            <Feather name="arrow-left" size={24} color="black" />
+            {/* <Feather name="arrow-left" size={24} color="black" /> */}
           </TouchableOpacity>
           <Text
             style={{
               textAlign: "center",
               marginRight: 20,
               fontSize: 18,
-              fontWeight: 500,
+              fontWeight: "500",
               fontFamily: "Rubik_400Regular",
             }}
           >
@@ -359,10 +318,10 @@ const Jobs = (props) => {
           }}
         >
           <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <Image
+            {/* <Image
               source={require("../assets/icons/searchIcon.png")}
               style={{ width: 17, height: 17, marginRight: 20 }}
-            />
+            /> */}
             <TextInput
               placeholder="Search"
               placeholderTextColor="#888"
@@ -389,7 +348,7 @@ const Jobs = (props) => {
           <Text
             style={{
               fontSize: 14,
-              fontWeight: 500,
+              fontWeight: "500",
               fontFamily: "Rubik_400Regular",
             }}
           >
@@ -398,7 +357,7 @@ const Jobs = (props) => {
           <Text
             style={{
               fontSize: 12,
-              fontWeight: 400,
+              fontWeight: "400",
               color: "rgba(189, 189, 189, 1)",
               fontFamily: "Rubik_400Regular",
             }}
@@ -450,7 +409,7 @@ const Jobs = (props) => {
                     setLoading(true);
                   }}
                 >
-                  {item.bookmarked === 0 ? (
+                  {/* {item.bookmarked === 0 ? (
                     <Feather
                       style={styles.rightMarginA}
                       name="bookmark"
@@ -464,7 +423,7 @@ const Jobs = (props) => {
                       size={22}
                       color="gold"
                     />
-                  )}
+                  )} */}
                 </TouchableOpacity>
               </View>
 
@@ -479,10 +438,10 @@ const Jobs = (props) => {
                     size={24}
                     color="rgba(203, 16, 0, 1)"
                   /> */}
-                  <Image
+                  {/* <Image
                     source={require("../assets/icons/pdf.png")}
                     style={styles.imageIcon}
-                  />
+                  /> */}
                   <Text
                     style={styles.pdfText}
                     selectable={false}
@@ -496,11 +455,10 @@ const Jobs = (props) => {
                     setDownloadingFilePath(item.path);
                     console.log("path "+item.path)
                     downloadFile(item.path)
- //                   showRewardedAddDialog()
                   }}
                   disabled={downloadingFileId === item.id}
                 >
-                  {downloadingFileId === item.id && downloadStarted ? (
+                  {/* {downloadingFileId === item.id && downloadStarted ? (
                     <Image
                       // source={require ("../../assets/icons/downloading.png")}
                       source={require("../assets/icons/downloading.png")}
@@ -512,7 +470,7 @@ const Jobs = (props) => {
                       size={26}
                       color="rgba(12, 229, 191, 1)"
                     />
-                  )}
+                  )} */}
                 </TouchableOpacity>
               </View>
             </View>
@@ -549,12 +507,12 @@ const styles= StyleSheet.create({
    justifyContent: "space-between",
  },
   nameTextStyler:{          
-     fontWeight: 500,
+     fontWeight: "500",
      fontSize: 16,
      fontFamily: "Rubik_400Regular",          
  },
  dateStyler:{
-   fontWeight: 400,
+   fontWeight: "400",
    fontSize: 13,
    color: "rgba(176, 176, 176, 1)",
    fontFamily: "Rubik_400Regular",

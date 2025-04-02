@@ -1,7 +1,11 @@
 // metro.config.js
 const path = require('path');
+const { getDefaultConfig } = require('@expo/metro-config');
+
+const defaultConfig = getDefaultConfig(__dirname);
 
 module.exports = {
+  ...defaultConfig,
   transformer: {
     getTransformOptions: async () => ({
       transform: {
@@ -11,9 +15,9 @@ module.exports = {
     }),
   },
   resolver: {
-    // Ensure this line exists or is configured properly
+    ...defaultConfig.resolver,
     assetExts: ['db', 'mp4', 'jpg', 'png', 'ttf', 'wav', 'mp3'],
-    sourceExts: ['jsx', 'js', 'ts', 'tsx', 'cjs', 'json'],
+    sourceExts: ['jsx', 'js', 'ts', 'tsx', 'json'],
   },
   resolver: {
     blacklistRE: /.*\/__fixtures__\/.*/,

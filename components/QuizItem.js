@@ -1,6 +1,6 @@
 import { View, Text, TouchableOpacity, Image, StyleSheet } from "react-native";
 import React from "react";
-import { Feather } from "@expo/vector-icons";
+// import { Feather } from "@expo/vector-icons";
 
 const QuizItem = ({  item,  index, page, mainProps, questionAttemptedItem, subselectedItem }) => {
 
@@ -145,7 +145,7 @@ const styles= StyleSheet.create({
         },
          totalQuestions:{
           fontSize: 14,
-          fontWeight: 500,
+          fontWeight: "500",
           marginBottom: 8,
           fontFamily: "Rubik_400Regular",
         },

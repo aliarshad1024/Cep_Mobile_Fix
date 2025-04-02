@@ -13,9 +13,7 @@ import {
   CLEAR_MESSAGE,
   UPDATE_USER,
   CHANGE_THEME_COLOR,
-  SHUFFLE_LOGIN,
-  CHANGE_REWARD,
-  REWARD_BACK
+  SHUFFLE_LOGIN
 } from "../Types";
 import { returnErrors } from "./errorActions";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -32,6 +30,7 @@ export const login = (data) => (dispatch) => {
   for (const key in data) {
     searchParams.append(key, data[key]);
   }
+
   fetch(`${baseUrl}/api/login`, {
     method: "POST",
     headers: {
@@ -42,50 +41,63 @@ export const login = (data) => (dispatch) => {
   })
     .then((res) => res.json())
     .then((data) => {
-      console.log("Login response : "+JSON.stringify(data))
-      if (data.message === "Login successful") {
-        // registerForPushNotifications(data.data);
-        let dataForImage = {
-          filename: data.data.displaypicture,
-          signupmethod: data.data.signupmethod
-            ? data.data.signupmethod
-            : "email",
-        };
-        // let token = data.access_token.slice(1, -1);
-        const searchParams = new URLSearchParams();
-        for (const key in dataForImage) {
-          searchParams.append(key, dataForImage[key]);
-        }
+      console.log("Login response : " + JSON.stringify(data));
 
-        fetch(`${baseUrl}/api/user/picture/`, {
-          method: "POST",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/x-www-form-urlencoded",
-            Authorization: `Bearer ${data.access_token}`,
-          },
-          body: searchParams.toString(),
-        })
-          .then((response) =>
-            response.json().then((resp) => {
-              let picture = `data:image/${resp.data.filename
-                .split(".")
-                .pop()};base64,${resp.data.image}`;
+      if (data.message === "Login successful") {
+        if (data.data.displaypicture) {
+          // Fetch picture only if displaypicture exists
+          let dataForImage = {
+            filename: data.data.displaypicture,
+            signupmethod: data.data.signupmethod || "email",
+          };
+
+          const searchParams = new URLSearchParams();
+          for (const key in dataForImage) {
+            searchParams.append(key, dataForImage[key]);
+          }
+
+          fetch(`${baseUrl}/api/user/picture/`, {
+            method: "POST",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/x-www-form-urlencoded",
+              Authorization: `Bearer ${data.access_token}`,
+            },
+            body: searchParams.toString(),
+          })
+            .then((response) => response.json())
+            .then((resp) => {
+              if (resp.data && resp.data.filename && resp.data.image) {
+                let picture = `data:image/${resp.data.filename
+                  .split(".")
+                  .pop()};base64,${resp.data.image}`;
+                dispatch({
+                  type: LOGIN_SUCCESS,
+                  payload: { ...data, picture },
+                });
+              } else {
+                console.log("Invalid image response, setting picture to null");
+                dispatch({
+                  type: LOGIN_SUCCESS,
+                  payload: { ...data, picture: null },
+                });
+              }
+            })
+            .catch((e) => {
+              console.log("ERROR in image fetch", e);
               dispatch({
                 type: LOGIN_SUCCESS,
-                payload: { ...data, picture },
+                payload: { ...data, picture: null },
               });
-            })
-          )
-          .catch((e) => console.log("ERROR in image", e));
-      } else if (
-        data.message === "Incorrect password" ||
-        data.message === "Wrong email address" ||
-        data.message === "Parameters missing" ||
-        data.message === "Wrong email address or password" ||
-        data.message === "Wrong phone number or user does not exist."
-      ) {
-        // dispatch(returnErrors({ error: { error: data.error } }));
+            });
+        } else {
+          // No picture, dispatch login success directly
+          dispatch({
+            type: LOGIN_SUCCESS,
+            payload: { ...data, picture: null },
+          });
+        }
+      } else {
         dispatch({
           type: LOGIN_FAIL,
           payload: data.message,
@@ -97,6 +109,8 @@ export const login = (data) => (dispatch) => {
       dispatch({ type: REGISTER_FAIL });
     });
 };
+
+
 
 export const logout = () => {
   return {
@@ -232,8 +246,8 @@ export const rewardedNot = () =>async(dispatch) => {
 
 
 
-export const shufflelogin=()  => async (dispatch)=>{
-  dispatch ({
-    type:SHUFFLE_LOGIN
- });
+export const shufflelogin = () => async (dispatch) => {
+  dispatch({
+    type: SHUFFLE_LOGIN,
+  });
 };

@@ -8,7 +8,7 @@ import {
   ScrollView,
   Alert,
 } from "react-native";
-import { Feather, MaterialIcons } from "@expo/vector-icons";
+// import { Feather, MaterialIcons } from "@expo/vector-icons";
 import { useFonts } from "expo-font";
 
 import { Image } from "react-native";
@@ -223,11 +223,11 @@ if(fontsLoaded){
             alignItems: "center",
           }}
         >
-          <MaterialIcons
+          {/* <MaterialIcons
             name="perm-identity"
             size={24}
             color="rgba(204, 204, 204, 1)"
-          />
+          /> */}
           <TextInput
             placeholder="Email or phone number"
             autoCapitalize="none"
@@ -260,7 +260,7 @@ if(fontsLoaded){
             alignItems: "center",
           }}
         >
-          <MaterialIcons name="lock" size={24} color="rgba(204, 204, 204, 1)" />
+          {/* <MaterialIcons name="lock" size={24} color="rgba(204, 204, 204, 1)" /> */}
           <TextInput
             placeholder="Password"
             autoCapitalize="none"
@@ -276,11 +276,11 @@ if(fontsLoaded){
             style={{ flex: 1, marginLeft: 10, fontFamily: "Rubik_400Regular" }}
           />
           <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
-            <MaterialIcons
+            {/* <MaterialIcons
               name={showPassword ? "visibility" : "visibility-off"}
               size={24}
               color="rgba(139, 139, 139, 1)"
-            />
+            /> */}
           </TouchableOpacity>
         </View>
         {error && <ErrorAlert error={error} />}
@@ -371,7 +371,7 @@ if(fontsLoaded){
             textAlign: "center",
             color: "rgba(139, 139, 139, 1)",
             marginTop: 90,
-            fontWeight: 500,
+            fontWeight: "500",
             fontFamily: "Rubik_400Regular",
           }}
         >

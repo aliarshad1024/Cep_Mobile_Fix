@@ -10,7 +10,7 @@ import {
 } from "react-native";
 // import { RadioButton } from "react-native-paper";
 import React, { useState, useEffect } from "react";
-import { Feather, MaterialCommunityIcons } from "@expo/vector-icons";
+// import { Feather, MaterialCommunityIcons } from "@expo/vector-icons";
 import Footer from "../components/Footer";
 import { connect } from "react-redux";
 import { useFonts } from "expo-font";
@@ -141,14 +141,14 @@ const Profile = (props) => {
         >
           <View style={{ flexDirection: "row", alignItems: "center" }}>
             <TouchableOpacity onPress={() => props.navigation.goBack()}>
-              <Feather name="arrow-left" size={24} color="#FFF" />
+              {/* <Feather name="arrow-left" size={24} color="#FFF" /> */}
             </TouchableOpacity>
             <Text
               style={{
                 marginLeft: 20,
                 color: "#FFF",
                 fontSize: 18,
-                fontWeight: 500,
+                fontWeight: "500",
                 fontFamily: "Rubik_400Regular",
               }}
             >
@@ -220,7 +220,7 @@ const Profile = (props) => {
           <Text
             style={{
               fontSize: 16,
-              fontWeight: 500,
+              fontWeight: "500",
               marginTop: 10,
               color: "white",
               fontFamily: "Rubik_400Regular",
@@ -250,7 +250,7 @@ const Profile = (props) => {
               <Text
                 style={{
                   fontSize: 14,
-                  fontWeight: 500,
+                  fontWeight: "500",
                   marginTop: 10,
                   marginLeft: 15,
                   fontFamily: "Rubik_400Regular",
@@ -277,7 +277,7 @@ const Profile = (props) => {
             <Text
               style={{
                 fontSize: 14,
-                fontWeight: 500,
+                fontWeight: "500",
                 marginTop: 10,
                 marginLeft: 15,
                 marginBottom: 5,
@@ -343,7 +343,7 @@ const Profile = (props) => {
             <Text
               style={{
                 fontSize: 14,
-                fontWeight: 500,
+                fontWeight: "500",
                 marginVertical: 10,
                 marginLeft: 15,
                 fontFamily: "Rubik_400Regular",
@@ -364,12 +364,12 @@ const Profile = (props) => {
               onPress={() => setShowDatePicker(true)}
             >
               <Text style={{ color: "black" }}>{dob}</Text>
-              <MaterialCommunityIcons
+              {/* <MaterialCommunityIcons
                 style={{ marginLeft: "auto" }}
                 name="clock-edit-outline"
                 size={24}
                 color="cornflowerblue"
-              />
+              /> */}
             </TouchableOpacity>
             {showDatePicker && (
               <DateTimePicker
@@ -382,7 +382,7 @@ const Profile = (props) => {
             <Text
               style={{
                 fontSize: 14,
-                fontWeight: 500,
+                fontWeight: "500",
                 marginTop: 10,
                 marginLeft: 15,
                 marginTop: 15,
@@ -410,7 +410,7 @@ const Profile = (props) => {
             <Text
               style={{
                 fontSize: 14,
-                fontWeight: 500,
+                fontWeight: "500",
                 marginTop: 10,
                 marginLeft: 15,
                 marginBottom: 5,
@@ -458,7 +458,7 @@ const Profile = (props) => {
             <Text
               style={{
                 fontSize: 14,
-                fontWeight: 500,
+                fontWeight: "500",
                 marginTop: 10,
                 marginLeft: 15,
                 marginTop: 15,
@@ -492,7 +492,7 @@ const Profile = (props) => {
             <Text
               style={{
                 fontSize: 14,
-                fontWeight: 500,
+                fontWeight: "500",
                 marginTop: 10,
                 marginLeft: 15,
                 marginTop: 15,
@@ -526,7 +526,7 @@ const Profile = (props) => {
             <Text
               style={{
                 fontSize: 14,
-                fontWeight: 500,
+                fontWeight: "500",
                 marginTop: 10,
                 marginLeft: 15,
                 marginTop: 15,
@@ -643,7 +643,7 @@ const styles = StyleSheet.create({
   label: {
     fontSize: 14,
     marginBottom: 8,
-    fontWeight: 500,
+    fontWeight: "500",
     fontFamily: "Rubik_400Regular",
     marginLeft: 10,
   },

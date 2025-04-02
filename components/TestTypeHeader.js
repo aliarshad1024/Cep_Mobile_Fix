@@ -31,7 +31,7 @@ const TestTypeHeader = (props) => {
             <Text
               style={{
                 fontSize: 18,
-                fontWeight: 500,
+                fontWeight: "500",
                 color: "white",
               }}
             >

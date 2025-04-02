@@ -16,7 +16,7 @@ import Loading from "../../components/Loading";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { connect } from "react-redux";
 import { logout } from "../../redux/actions/authActions";
-import { Feather } from "@expo/vector-icons";
+// import { Feather } from "@expo/vector-icons";
 import { useFonts } from "expo-font";
 import { Rubik_400Regular } from "@expo-google-fonts/rubik";
 import QuizItem from "../../components/QuizItem";
@@ -162,14 +162,14 @@ const AttemptAllMCQs = (props) => {
             style={{ marginRight: 20 }}
             onPress={() => props.navigation.goBack()}
           >
-            <Feather name="arrow-left" size={24} color="black" />
+            {/* <Feather name="arrow-left" size={24} color="black" /> */}
           </TouchableOpacity>
           <Text
             style={{
               textAlign: "center",
               marginRight: 20,
               fontSize: 18,
-              fontWeight: 500,
+              fontWeight: "500",
               fontFamily: "Rubik_400Regular",
             }}
             selectable={false}
@@ -186,7 +186,7 @@ const AttemptAllMCQs = (props) => {
             marginTop: 140,
             fontSize: 16,
             fontFamily: "Rubik_400Regular",
-            fontWeight: 400,
+            fontWeight: "400",
           }}
         >
           Coming Soon

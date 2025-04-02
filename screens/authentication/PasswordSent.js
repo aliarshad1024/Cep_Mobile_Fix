@@ -7,14 +7,14 @@ import {
   Keyboard,
   Alert,
 } from "react-native";
-import { Feather } from "@expo/vector-icons";
+// import { Feather } from "@expo/vector-icons";
 import { Image } from "react-native";
-import Loading from "../../components/Loading";
+// import Loading from "../../components/Loading";
 import { connect } from "react-redux";
 import { baseUrl } from "../../constants/global";
 
 function PasswordSent(props) {
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
  
   useEffect(() => {
@@ -66,9 +66,9 @@ let otp;
   }
 
 
-  if (loading) {
-    return <Loading />;
-  }
+  // if (loading) {
+  //   return <Loading />;
+  // }
   return (
     <View style={{ flex: 1, backgroundColor: "white" }}>
       
@@ -82,7 +82,7 @@ let otp;
         }}
       >
         <TouchableOpacity onPress={() => props.navigation.goBack()}>
-          <Feather name="arrow-left" size={24} color="black" />
+          {/* <Feather name="arrow-left" size={24} color="black" /> */}
         </TouchableOpacity>
         <Text style={{ marginLeft: 20, fontSize: 20, fontWeight: 500 }}>
           Password Sent
@@ -106,7 +106,7 @@ let otp;
             color: "rgba(139, 139, 139, 1)",
             textAlign: "center",
             marginTop: 20,
-            fontWeight: 600,
+            fontWeight: "600",
             marginHorizontal:30,
             fontSize: 18,
           }}
@@ -118,7 +118,7 @@ let otp;
             color: "rgba(139, 139, 139, 1)",
             textAlign: "center",
             marginBottom: 20,
-            fontWeight: 600,
+            fontWeight: "600",
             fontSize: 18,
           }}
         >
