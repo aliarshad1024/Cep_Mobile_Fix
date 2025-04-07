@@ -27,13 +27,13 @@ export default function App() {
   OneSignal.Debug.setLogLevel(LogLevel.Verbose);
   OneSignal.Notifications.requestPermission(true);
 
-  useEffect(() => {
-    async function prepare() {
-      // SplashScreen.hide() needs to be called after the native splash screen has been hidden
-      SplashScreen.hide();
-    }
-    prepare();
-  }, []);
+  // useEffect(() => {
+  //   async function prepare() {
+  //     // SplashScreen.hide() needs to be called after the native splash screen has been hidden
+  //     SplashScreen.hide();
+  //   }
+  //   prepare();
+  // }, []);
 
   useEffect(() => {
     const checkAppVersion = async () => {

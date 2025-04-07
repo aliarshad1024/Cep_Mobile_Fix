@@ -1,6 +1,6 @@
 import { View, Text, TouchableOpacity, Image } from "react-native";
 import React from "react";
-import FastImage from 'react-native-fast-image'
+// import FastImage from 'react-native-fast-image'
 
 const Subject = ({ navigation, item }) => {
 

@@ -1,7 +1,7 @@
 const currentEnvir = "dev";  //development = dev, staging = stage, production= prod
-const developmentBaseUrl = "http://competitiveexaminationpakistan.com";
-const stagingBaseUrl = "http://competitiveexaminationpakistan.com";
-const productionBaseUrl = "http://competitiveexaminationpakistan.com";
+const developmentBaseUrl = "https://competitiveexaminationpakistan.com";
+const stagingBaseUrl = "https://competitiveexaminationpakistan.com";
+const productionBaseUrl = "https://competitiveexaminationpakistan.com";
 
 let _baseUrl = "";
 switch(currentEnvir){

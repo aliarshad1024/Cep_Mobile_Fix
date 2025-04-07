@@ -1,4 +1,4 @@
-package com.aliarshad1024.cep;
+package com.dev_cep.CEP;
 
 import android.os.Build;
 import android.os.Bundle;

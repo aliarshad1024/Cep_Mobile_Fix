@@ -1,6 +1,6 @@
 import { View, Text, TouchableOpacity, Image,  StyleSheet } from "react-native";
 import React from "react";
-import FastImage from 'react-native-fast-image'
+// import FastImage from 'react-native-fast-image'
 
 const MainSection = ({ navigation, item}) => {
   //  {console.log("Main Section Item : "+JSON.stringify(section))}
@@ -22,8 +22,8 @@ const MainSection = ({ navigation, item}) => {
       <View
         style={styles.sub_container}
       >
-         <FastImage
-          resizeMode={FastImage.resizeMode.contain}
+         <Image
+          // resizeMode={Image.resizeMode.contain}
          // source={require("../assets/bookcover.png")}
           source={{ uri: `${item.icon}` }}
           style={styles.image_styler}

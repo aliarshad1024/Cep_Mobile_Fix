@@ -1,4 +1,4 @@
-package com.aliarshad1024.cep;
+package com.dev_cep.CEP;
 
 import android.app.Application;
 import android.content.res.Configuration;

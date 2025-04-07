@@ -77,27 +77,27 @@ def enableProguardInReleaseBuilds = (findProperty('android.enableProguardInRelea
 def jscFlavor = 'org.webkit:android-jsc:+'
 
 android {
-    namespace "com.cep"
+    ndkVersion rootProject.ext.ndkVersion
+
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-    buildFeatures {
-        buildConfig true
-    }
-
+    namespace 'com.dev_cep.CEP'
     defaultConfig {
-        applicationId "com.cep"
+        applicationId 'com.dev_cep.CEP'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
-        versionName "1.0"
-    }
+        versionCode 21
+        versionName "1.0.1"
 
+        buildConfigField("boolean", "REACT_NATIVE_UNSTABLE_USE_RUNTIME_SCHEDULER_ALWAYS", (findProperty("reactNative.unstable_useRuntimeSchedulerAlways") ?: true).toString())
+    }
     signingConfigs {
-        debug {
-            storeFile file('debug.keystore')
-            storePassword 'android'
-            keyAlias 'androiddebugkey'
-            keyPassword 'android'
+     release {
+                storeFile file('keystore.jks')
+                storePassword '280b9f75f2b911745c341ca8cde455a3'
+                keyAlias '18483dfd35bc2e23561c378dfbf98b76'
+                keyPassword 'd748c7fd4a7808624d8f7ec24d48624b'
+        
         }
     }
     buildTypes {
@@ -107,7 +107,7 @@ android {
         release {
             // Caution! In production, you need to generate your own keystore file.
             // see https://reactnative.dev/docs/signed-apk-android.
-            signingConfig signingConfigs.debug
+            signingConfig signingConfigs.release
             shrinkResources (findProperty('android.enableShrinkResourcesInReleaseBuilds')?.toBoolean() ?: false)
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
@@ -136,12 +136,8 @@ android {
 }
 
 dependencies {
-    // The version of react-native from node_modules
-    implementation "com.facebook.react:react-native:+"
-    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
-    implementation "androidx.browser:browser:1.8.0"
-    implementation "androidx.webkit:webkit:1.11.0-alpha02"
-    implementation "androidx.annotation:annotation-experimental:1.4.0"
+    // The version of react-native is set by the React Native Gradle Plugin
+    implementation("com.facebook.react:react-android")
 
     def isGifEnabled = (findProperty('expo.gif.enabled') ?: "") == "true";
     def isWebpEnabled = (findProperty('expo.webp.enabled') ?: "") == "true";
