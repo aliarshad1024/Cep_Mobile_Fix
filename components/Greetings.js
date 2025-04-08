@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, Image } from "react-native";
-// import { Ionicons } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
 
 const Greetings = () => {
   const [timeOfDay, setTimeOfDay] = useState("");
@@ -30,13 +30,13 @@ const Greetings = () => {
       )}
       {timeOfDay === "afternoon" && (
         <View style={{ flexDirection: "row", alignItems: "center" }}>
-          {/* <Ionicons name="ios-partly-sunny" size={15} color="yellow" /> */}
+          <Ionicons name="ios-partly-sunny" size={15} color="yellow" />
           <Text style={{ marginLeft: 10, fontSize: 13,color:'white' }}>Good Afternoon!</Text>
         </View>
       )}
       {timeOfDay === "night" && (
         <View style={{ flexDirection: "row", alignItems: "center" }}>
-          {/* <Ionicons name="ios-moon" size={15} color="white" /> */}
+          <Ionicons name="ios-moon" size={15} color="white" />
           <Text style={{ marginLeft: 10, fontSize: 13,color:'white' }}>
             Good Evening!
           </Text>
