@@ -16,9 +16,9 @@ import Loading from "../../components/Loading";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { connect } from "react-redux";
 import { logout } from "../../redux/actions/authActions";
-// import { Feather } from "@expo/vector-icons";
+import { Feather } from "@expo/vector-icons";
 import { useFonts } from "expo-font";
-import { Rubik_400Regular } from "@expo-google-fonts/rubik";
+// import { Rubik_400Regular } from "@expo-google-fonts/rubik";
 import QuizItem from "../../components/QuizItem";
 import { baseUrl } from "../../constants/global";
 
@@ -29,48 +29,49 @@ const AttemptAllMCQs = (props) => {
 
   const [displayMcqs, setDisplayMcqs] = useState(1);
 
-
   // {console.log()}
 
-  
-  const renderQuizItem=useCallback(({item, index}) => (
-    <QuizItem
-       item={item}
-       index={index}
-       page={props.page}
-       mainProps={props}
-       //state_selectedOption={selectedOptions}
-       questionAttemptedItem={(atempt_Item, atempt_Index, atempt_isCorrect)=>{
-              props.setSelectedOptions({
-                               ...props.selectedOptions,
-                               [atempt_Item.questionid]: atempt_Index,
-                              });
-              if(atempt_isCorrect){
-                 props.setTotalCorrect(props.totalCorrect + 1);
-              }else{
-                 props.setTotalWrong(props.totalWrong + 1);
-              }                
-                 props.setQuestionsAttempted(props.questionsAttempted + 1);
-              }}
-        subselectedItem={props.selectedOptions}      
-    />
-  ),[props.selectedOptions, props.page]);
-
-
-
-
-
-
+  const renderQuizItem = useCallback(
+    ({ item, index }) => (
+      <QuizItem
+        item={item}
+        index={index}
+        page={props.page}
+        mainProps={props}
+        //state_selectedOption={selectedOptions}
+        questionAttemptedItem={(
+          atempt_Item,
+          atempt_Index,
+          atempt_isCorrect
+        ) => {
+          props.setSelectedOptions({
+            ...props.selectedOptions,
+            [atempt_Item.questionid]: atempt_Index,
+          });
+          if (atempt_isCorrect) {
+            props.setTotalCorrect(props.totalCorrect + 1);
+          } else {
+            props.setTotalWrong(props.totalWrong + 1);
+          }
+          props.setQuestionsAttempted(props.questionsAttempted + 1);
+        }}
+        subselectedItem={props.selectedOptions}
+      />
+    ),
+    [props.selectedOptions, props.page]
+  );
 
   useEffect(() => {
     getAllMCQs(1);
   }, [props.page]);
-  useEffect(() => {
-    props.setTimeStarted(Date.now())
-  }, []);
-  let [fontsLoaded] = useFonts({
-    Rubik_400Regular,
-  });
+
+  // useEffect(() => {
+  //   props.setTimeStarted(Date.now());
+  // }, []);
+
+  // let [fontsLoaded] = useFonts({
+  //   Rubik_400Regular,
+  // });
   // const updatePage = (type) => {
   //   if (type === "inc") {
   //     setPage(page + 1);
@@ -126,7 +127,7 @@ const AttemptAllMCQs = (props) => {
             {
               text: "Ok",
               onPress: () => {
-               // props.navigation.navigate("SignIn");
+                // props.navigation.navigate("SignIn");
                 props.logout();
               },
             },
@@ -138,7 +139,7 @@ const AttemptAllMCQs = (props) => {
           {
             text: "Login Again",
             onPress: () => {
-             // props.navigation.navigate("SignIn");
+              // props.navigation.navigate("SignIn");
               props.logout();
             },
           },
@@ -162,7 +163,7 @@ const AttemptAllMCQs = (props) => {
             style={{ marginRight: 20 }}
             onPress={() => props.navigation.goBack()}
           >
-            {/* <Feather name="arrow-left" size={24} color="black" /> */}
+            <Feather name="arrow-left" size={24} color="black" />
           </TouchableOpacity>
           <Text
             style={{
@@ -170,7 +171,7 @@ const AttemptAllMCQs = (props) => {
               marginRight: 20,
               fontSize: 18,
               fontWeight: "500",
-              fontFamily: "Rubik_400Regular",
+              // fontFamily: "Rubik_400Regular",
             }}
             selectable={false}
           >
@@ -185,7 +186,7 @@ const AttemptAllMCQs = (props) => {
             textAlign: "center",
             marginTop: 140,
             fontSize: 16,
-            fontFamily: "Rubik_400Regular",
+            // fontFamily: "Rubik_400Regular",
             fontWeight: "400",
           }}
         >

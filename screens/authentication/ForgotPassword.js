@@ -7,7 +7,7 @@ import {
   SafeAreaView,
   Alert
 } from "react-native";
-// import { Feather, MaterialIcons } from "@expo/vector-icons";
+import { Feather, MaterialIcons } from "@expo/vector-icons";
 import { useFonts } from "expo-font";
 
 import { Image } from "react-native";
@@ -157,7 +157,7 @@ function ForgotPassword(props) {
           style={{ left: 20 }}
           onPress={() => props.navigation.goBack()}
         >
-          {/* <Feather name="arrow-left" size={24} color="white" /> */}
+          <Feather name="arrow-left" size={24} color="white" />
         </TouchableOpacity>
       </View>
       <View style={{ flex: 2, paddingHorizontal: 20, marginVertical: 25 }}>
@@ -192,11 +192,11 @@ function ForgotPassword(props) {
             alignItems: "center",
           }}
         >
-          {/* <MaterialIcons
+          <MaterialIcons
             name="email"
             size={24}
             color="rgba(204, 204, 204, 1)"
-          /> */}
+          />
           
           <TextInput
             placeholder="Email Address"

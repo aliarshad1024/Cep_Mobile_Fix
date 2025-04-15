@@ -10,7 +10,7 @@ import {
 } from "react-native";
 // import { RadioButton } from "react-native-paper";
 import React, { useState, useEffect } from "react";
-// import { Feather, MaterialCommunityIcons } from "@expo/vector-icons";
+import { Feather, MaterialCommunityIcons } from "@expo/vector-icons";
 import Footer from "../components/Footer";
 import { connect } from "react-redux";
 import { useFonts } from "expo-font";
@@ -141,7 +141,7 @@ const Profile = (props) => {
         >
           <View style={{ flexDirection: "row", alignItems: "center" }}>
             <TouchableOpacity onPress={() => props.navigation.goBack()}>
-              {/* <Feather name="arrow-left" size={24} color="#FFF" /> */}
+              <Feather name="arrow-left" size={24} color="#FFF" />
             </TouchableOpacity>
             <Text
               style={{

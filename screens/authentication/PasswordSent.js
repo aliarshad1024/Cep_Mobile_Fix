@@ -7,7 +7,7 @@ import {
   Keyboard,
   Alert,
 } from "react-native";
-// import { Feather } from "@expo/vector-icons";
+import { Feather } from "@expo/vector-icons";
 import { Image } from "react-native";
 // import Loading from "../../components/Loading";
 import { connect } from "react-redux";
@@ -82,7 +82,7 @@ let otp;
         }}
       >
         <TouchableOpacity onPress={() => props.navigation.goBack()}>
-          {/* <Feather name="arrow-left" size={24} color="black" /> */}
+          <Feather name="arrow-left" size={24} color="black" />
         </TouchableOpacity>
         <Text style={{ marginLeft: 20, fontSize: 20, fontWeight: 500 }}>
           Password Sent

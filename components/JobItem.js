@@ -1,7 +1,7 @@
 import { View, Text, TouchableOpacity, Image, StyleSheet } from "react-native";
 import React from "react";
-// import { Feather } from "@expo/vector-icons";
-// import { FontAwesome } from "@expo/vector-icons";
+import { Feather } from "@expo/vector-icons";
+import { FontAwesome } from "@expo/vector-icons";
 
 const JobItem = ({item, index, downloadingFileId ,setBookMark, delBookMark, loading, setDownloadingFileId, downloadFile }) => {
 
@@ -40,7 +40,7 @@ const JobItem = ({item, index, downloadingFileId ,setBookMark, delBookMark, load
                     loading(true);
                   }}
                 >
-                  {/* {item.bookmarked === 0 ? (
+                  {item.bookmarked === 0 ? (
                     <Feather
                       style={styles.rightMarginA}
                       name="bookmark"
@@ -54,7 +54,7 @@ const JobItem = ({item, index, downloadingFileId ,setBookMark, delBookMark, load
                       size={22}
                       color="gold"
                     />
-                  )} */}
+                  )}
                 </TouchableOpacity>
               </View>
 
@@ -83,7 +83,7 @@ const JobItem = ({item, index, downloadingFileId ,setBookMark, delBookMark, load
                   }}
                   disabled={downloadingFileId === item.id}
                 >
-                  {/* {downloadingFileId === item.id ? (
+                  {downloadingFileId === item.id ? (
                     <Image
                       source={require("../assets/icons/downloading.gif")}
                       style={styles.downloadContainer}
@@ -94,7 +94,7 @@ const JobItem = ({item, index, downloadingFileId ,setBookMark, delBookMark, load
                       size={26}
                       color="rgba(12, 229, 191, 1)"
                     />
-                  )} */}
+                  )}
                 </TouchableOpacity>
               </View>
             </View>

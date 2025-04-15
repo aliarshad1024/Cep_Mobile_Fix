@@ -1,6 +1,6 @@
 import { View, Text, TouchableOpacity, FlatList, Alert } from "react-native";
 import React, { useState, useEffect, useCallback } from "react";
-// import { Feather } from "@expo/vector-icons";
+import { Feather } from "@expo/vector-icons";
 import ProgressBar from "../../components/ProgressBar";
 import url from "../../utils/URL";
 import Loading from "../../components/Loading";
@@ -129,7 +129,7 @@ const CustomizeQuizQuestions = (props) => {
           style={{ marginRight: 20 }}
           onPress={() => props.navigation.goBack()}
         >
-          {/* <Feather name="arrow-left" size={24} color="black" /> */}
+          <Feather name="arrow-left" size={24} color="black" />
         </TouchableOpacity>
         <Text style={{ textAlign: "center", marginRight: 20, fontSize: 18 }}>
           Customize Quiz

@@ -1,15 +1,15 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
-// import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const ErrorAlert = ({ error }) => {
   return (
     <View style={styles.alert}>
-      {/* <MaterialCommunityIcons
+      <MaterialCommunityIcons
         name="information-outline"
         size={24}
         color="red"
-      /> */}
+      />
       <Text style={styles.msg}>{error}</Text>
     </View>
   );
@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     flexDirection: "row",
     alignItems: "center",
-    marginVertical:10
+    marginVertical: 10,
   },
   msg: {
     color: "red",

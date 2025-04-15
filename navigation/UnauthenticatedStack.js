@@ -36,7 +36,7 @@ const UnauthenticatedStack=(props)=>{
         <View style={{ marginBottom: 30 }}>
           <StatusBar backgroundColor={props.auth.themeMainColor} />
         </View>
-        <UnAuth_Stack.Navigator initialRouteName="SignIn">
+        <UnAuth_Stack.Navigator initialRouteName="Profile">
           <UnAuth_Stack.Screen
             name="SignIn"
             component={SignInScreen}

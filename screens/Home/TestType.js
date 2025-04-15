@@ -10,24 +10,134 @@ import React, { useState, useEffect } from "react";
 import Footer from "../../components/Footer";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { connect } from "react-redux";
+// import {BannerAd, BannerAdSize, RewardedAd, TestIds, AdEventType, RewardedAdEventType, RewardedInterstitialAd, useRewardedInterstitialAd} from 'react-native-google-mobile-ads';
 import url from "../../utils/URL";
 import Loading from "../../components/Loading";
 import { logout, shufflelogin, rewardedShown, rewardedNot } from "../../redux/actions/authActions";
-import { useFonts } from "expo-font";
-import { Rubik_400Regular } from "@expo-google-fonts/rubik";
+// import { useFonts } from "expo-font";
+// import { Rubik_400Regular } from "@expo-google-fonts/rubik";
 import PushNotifications from "../../utils/PushNotifications";
-import { baseUrl, admobAdBanner } from "../../constants/global";
+import { baseUrl, admobAdBanner, admobTestRewarded, admobRewardedInterestial } from "../../constants/global";
 import { Button } from "react-native";
 import { ToastAndroid } from "react-native";
+
+
 
 const TestType = (props) => {
   const [exams, setExams] = useState([]);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
   
-  let [fontsLoaded] = useFonts({
-    Rubik_400Regular,
-  });
+  // let [fontsLoaded] = useFonts({
+  //   Rubik_400Regular,
+  // });
+
+
+
+
+  // const rewarded_admobAd = RewardedInterstitialAd.createForAdRequest("ca-app-pub-3940256099942544/5354046379", {
+  //   requestNonPersonalizedAdsOnly: true,
+  //   keywords: ['fashion', 'clothing'],
+  // });
+
+
+  // const { isLoaded, isClosed, load, show, isEarnedReward,error }  = useRewardedInterstitialAd(admobRewardedInterestial, {
+  //   requestNonPersonalizedAdsOnly: true,
+  // });
+  
+
+  // useEffect(() => {
+  //   // Start loading the interstitial straight away
+  //   if(isLoaded){
+  //     console.log("loaded reward...")
+  //     ToastAndroid.show("Reward Loaded", ToastAndroid.LONG)
+  //   }
+  // }, [isLoaded]);
+
+  // useEffect(()=>{
+  //   console.log("err..."+JSON.stringify(error))
+  // },[error])
+
+  // useEffect(()=>{
+  //   load()
+  // },[isClosed])
+
+  // useEffect(() => {
+  //   // Start loading the interstitial straight away
+  //   //if(props.auth.rewardedShown!=true){
+  
+  // console.log("is Loaded."+isLoaded)    
+  // if(!isLoaded){ 
+  //  load();
+  //  console.log("Rewarded Loading...")
+ 
+  // }
+  // }, [load, ]);
+
+
+
+
+  // useEffect(()=>{
+  //   if(isEarnedReward){
+  //     props.navigation.navigate("CustomizeQuiz")
+  //   }
+  // },[isEarnedReward])
+
+
+  // useEffect(() => {
+  //   const unsubscribe = rewarded_admobAd.addAdEventListener(RewardedAdEventType.LOADED,
+  //     () => {
+  //       console.log("video Loaded...")
+  //     //  rewarded_admobAd.show()
+  //     //  setRewardInterLoaded(true)
+  //    // rewarded_admobAd.show()
+  //     }
+  //   );
+
+  //   const reload = rewarded_admobAd.addAdEventListener(AdEventType.CLOSED,
+  //     () => {
+  //       console.log("video reloading...")
+  //    //   rewarded_admobAd.load();
+  //    // rewarded_admobAd.show()
+  //     }
+  //   );
+
+  //   const errorChecker = rewarded_admobAd.addAdEventListener(AdEventType.ERROR, 
+  //     (err) => {
+  //     console.log("got error "+JSON.stringify(err))
+  //     }
+  //   );
+
+  //   const unsubscribeEarned = rewarded_admobAd.addAdEventListener(
+  //     RewardedAdEventType.EARNED_REWARD,
+  //     (reward) => {
+  //       props.rewardedShown()
+  //       props.navigation.navigate("CustomizeQuiz")
+  //     },
+  //   );
+
+  //   // const earnedReward = rewarded_admobAd.addAdEventListener(RewardedAdEventType.EARNED_REWARD, () => {
+  //   //   //setRewardInterShown(true)
+    
+  //   // });
+  //  //  setRewardInterLoaded(true)
+  //  //  setRewardInterShown(false)
+  //   rewarded_admobAd.load();
+  //   console.log("Ad Loading...")      
+  //   // if(props.auth.rewardedShown!=true){
+  //   //   rewarded_admobAd.load();      
+  //   // }
+  //   return ()=> {
+  //   unsubscribe();
+  //   unsubscribeEarned();
+  //   errorChecker()
+  //   reload()
+  //   }
+  // }, []);
+
+
+ 
+
 
   useEffect(() => {
     getExams();
@@ -57,6 +167,7 @@ const TestType = (props) => {
             {
               text: "Ok",
               onPress: () => {
+                //props.navigation.navigate("SignIn");
                 props.logout();
               },
             },
@@ -86,15 +197,29 @@ const TestType = (props) => {
     }
   }
 
+
   useEffect(()=>{
+   // console.log("welcome "+props.auth.welcomePageSeen)
     if (props.auth.welcomePageSeen==false) {
+    //  console.log("welcome  b"+props.auth.welcomePageSeen)
+   
       props.navigation.navigate("AppIntro");
     }
   },[])
 
+
   function showRewardedAddDialog(){
-    props.navigation.navigate("CustomizeQuiz");
+        // if(isLoaded){  
+        //   Alert.alert("Customize Quiz", "In order to attempt 'Customize Quiz', we need you to watch an Ad.", [
+        //       { text: "Watch", onPress: () => show() },
+        //       { text: "Don't Watch", onPress: () => console.log("close") },
+        //   ]);
+        // }else{
+        // }
+        props.navigation.navigate("CustomizeQuiz")
   }
+
+
 
   if (loading) {
     return (
@@ -107,6 +232,43 @@ const TestType = (props) => {
   return (
     <View style={{ height: "100%", backgroundColor: "white" }}>
       <View>
+        
+      
+      <View style={{
+        marginVertical:5,
+        alignSelf:'center'
+      }}> 
+      {/* <BannerAd 
+        size={BannerAdSize.BANNER}
+        unitId={admobAdBanner}
+        onAdLoaded={() => {
+          console.log('Advert loaded');
+        }}
+        onAdFailedToLoad={error => {
+          console.error('Advert failed to load: ', error);
+        }}
+      />  */}
+      </View>
+       {/* <TouchableOpacity
+                    style={{
+                      backgroundColor: "rgba(255, 143, 15, 1)",
+                      paddingVertical: 5,
+                      paddingHorizontal: 20,
+                      marginTop: 10,
+                      height:50
+                    }}
+                    onPress={() => props.rewardedNot()}
+                  >
+                    <Text
+                      style={{ color: "white", fontSize: 15, fontWeight: 600 }}
+                    >
+                      Rewarded Not Status 
+                    </Text>
+                  </TouchableOpacity>  */}
+      <View>
+
+
+      </View>
         <FlatList
           style={{marginBottom:150}} 
           data={exams}
@@ -135,8 +297,8 @@ const TestType = (props) => {
                   style={{
                     color: "rgba(255, 143, 15, 1)",
                     fontSize: 18,
-                    fontWeight: "500",
-                    fontFamily: "Rubik_400Regular",
+                    fontWeight: 500,
+                    // fontFamily: "Rubik_400Regular",
                   }}
                 >
                   Customize Quiz
@@ -144,8 +306,9 @@ const TestType = (props) => {
                 <Text
                   style={{
                     fontSize: 10,
-                    fontWeight: "400",
-                    fontFamily: "Rubik_400Regular",
+                    fontWeight: 400,
+
+                    // fontFamily: "Rubik_400Regular",
                   }}
                 >
                   Select Subject According to paper
@@ -174,6 +337,19 @@ const TestType = (props) => {
                   </TouchableOpacity>
                 </View>
               </View>
+
+              <View>
+                <Image
+                  source={require("../../assets/customizeQuiz.png")}
+                  style={{ width: 93, height: 81 }}
+                />
+              </View>
+              <View>
+                <Image
+                  source={require("../../assets/icons/premium.png")}
+                  style={{ width: 10, height: 9 }}
+                />
+              </View>
             </View>
           }
           refreshing={refreshing}
@@ -192,10 +368,11 @@ const TestType = (props) => {
                 padding: 24,
                 marginBottom: 20,
                 marginHorizontal: 20,
-                fontWeight: "500",
+                fontWeight: 500,
                 borderRadius: 8,
               }}
               onPress={() =>
+                //console.log("item id "+item.id)
                 props.navigation.navigate("SelectSubject", { examid: item.id })
               }
               key={index}
@@ -211,9 +388,10 @@ const TestType = (props) => {
               <Text
                 style={{
                   color: "rgba(24, 24, 24, 1)",
-                  fontFamily: "Rubik_400Regular",
+                  // fontFamily: "Rubik_400Regular",
                   fontSize: 15,
-                  fontWeight: "600",                }}
+                  fontWeight: 600,
+                }}
               >
                 {item.name}
               </Text>

@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import Footer from "../../components/Footer";
 import { logout, changeThemeColor } from "../../redux/actions/authActions";
+import { Feather } from "@expo/vector-icons";
 import { connect } from "react-redux";
 import { useFonts } from "expo-font";
 import { Rubik_400Regular } from "@expo-google-fonts/rubik";
@@ -79,7 +80,7 @@ const Settings = (props) => {
         >
           <View style={{ flexDirection: "row", alignItems: "center" }}>
             <TouchableOpacity onPress={() => props.navigation.goBack()}>
-              {/* <Feather name="arrow-left" size={24} color="#FFF" /> */}
+              <Feather name="arrow-left" size={24} color="#FFF" />
             </TouchableOpacity>
             <Text
               style={{
@@ -241,7 +242,7 @@ const Settings = (props) => {
           }
           style={{ flexDirection: "row", marginBottom: 18 }}
         >
-          {/* <Feather name="share-2" size={24} color={props.auth.themeMainColor} /> */}
+          <Feather name="share-2" size={24} color={props.auth.themeMainColor} />
           <Text
             style={{
               fontSize: 14,
@@ -278,7 +279,7 @@ const Settings = (props) => {
           onPress={() => props.logout()}
           style={{ flexDirection: "row", marginBottom: 18 }}
         >
-          {/* <Feather name="log-out" size={24} color="rgba(238, 85, 0, 1)" /> */}
+          <Feather name="log-out" size={24} color="rgba(238, 85, 0, 1)" />
           <Text
             style={{
               fontSize: 14,

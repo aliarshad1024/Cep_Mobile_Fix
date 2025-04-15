@@ -15,13 +15,23 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { connect } from "react-redux";
 import Pagination from "../../components/Pagination";
 import { logout } from "../../redux/actions/authActions";
-import { useFonts } from "expo-font";
-import { Rubik_400Regular } from "@expo-google-fonts/rubik";
+// import { useFonts } from "expo-font";
+// import { Rubik_400Regular } from "@expo-google-fonts/rubik";
 import MCQItem from "../../components/MCQItem";
 import { baseUrl } from "../../constants/global";
-// import { Fontisto, MaterialCommunityIcons } from "@expo/vector-icons";
+import Icon from "react-native-vector-icons/FontAwesome";
 
-
+// import {
+//   BannerAd,
+//   BannerAdSize,
+//   RewardedAd,
+//   TestIds,
+//   AdEventType,
+//   RewardedAdEventType,
+//   RewardedInterstitialAd,
+//   useRewardedInterstitialAd,
+//   useInterstitialAd,
+// } from "react-native-google-mobile-ads";
 
 const ReviewAllMCQs = (props) => {
   const [displayDetails, setDisplayDetails] = useState(false);
@@ -30,47 +40,38 @@ const ReviewAllMCQs = (props) => {
   const [details, setDetails] = useState("");
   const [mcqs, setMcqs] = useState([]);
 
-
-
-  
-  
-
-
-
-  
-  
-  const renderMCQItem=useCallback(({item, index}) => (
-    <MCQItem
-       item={item}
-       index={index}
-       page={props.page}
-       mainProps={props}
-       isReview={true}
-       showDetailModal={(det, detType, detImage)=>{
-        const detailObject = {
-          detail:det,
-          detailType:detType,
-          detailImage:detImage
-        }
-        setDetails(detailObject);
-        setDisplayDetails(true);
-       }}
-    />
-  ),[props.page]);
-
-
-
+  const renderMCQItem = useCallback(
+    ({ item, index }) => (
+      <MCQItem
+        item={item}
+        index={index}
+        page={props.page}
+        mainProps={props}
+        isReview={true}
+        showDetailModal={(det, detType, detImage) => {
+          const detailObject = {
+            detail: det,
+            detailType: detType,
+            detailImage: detImage,
+          };
+          setDetails(detailObject);
+          setDisplayDetails(true);
+        }}
+      />
+    ),
+    [props.page]
+  );
 
   useEffect(() => {
     getReviewMCQs(1);
   }, [props.page]);
 
-  let [fontsLoaded] = useFonts({
-    Rubik_400Regular,
-  });
+  // let [fontsLoaded] = useFonts({
+  //   Rubik_400Regular,
+  // });
   const getReviewMCQs = async (page) => {
     setLoading(true);
-    console.log("ReviewMCQs page "+props.page)
+    console.log("ReviewMCQs page " + props.page);
     let user = await AsyncStorage.getItem("persist:auth");
     let token = JSON.parse(user).token.slice(1, -1);
     let data = {
@@ -140,8 +141,8 @@ const ReviewAllMCQs = (props) => {
             textAlign: "center",
             marginTop: 140,
             fontSize: 16,
-            fontFamily: "Rubik_400Regular",
-            fontWeight: "400",
+            // fontFamily: "Rubik_400Regular",
+            fontWeight: 400,
           }}
         >
           Coming Soon
@@ -170,18 +171,17 @@ const ReviewAllMCQs = (props) => {
           <View style={{ flex: 1, justifyContent: "center", borderRadius: 8 }}>
             <View
               style={{
-                flexDirection:'row-reverse',
+                flexDirection: "row-reverse",
                 backgroundColor: props.auth.themeMainColor,
                 paddingVertical: 10,
-                justifyContent:'space-between'
+                justifyContent: "space-between",
               }}
             >
-
               <TouchableOpacity
                 style={{
                   flexDirection: "row",
                   alignSelf: "flex-end",
-                  marginRight:10
+                  marginRight: 10,
                 }}
                 onPress={() => setDisplayDetails(false)}
               >
@@ -194,66 +194,65 @@ const ReviewAllMCQs = (props) => {
                 style={{
                   textAlign: "center",
                   color: "#FFFF",
-                  width:'100%',
-                  fontWeight: "600",
-                  paddingLeft:20,
+                  width: "100%",
+                  fontWeight: 600,
+                  paddingLeft: 20,
                   fontSize: 18,
-                  marginLeft:10,
-                  fontFamily: "Rubik_400Regular",
+                  marginLeft: 10,
+                  // fontFamily: "Rubik_400Regular",
                 }}
               >
                 Details
               </Text>
-              
             </View>
 
             <View style={{ backgroundColor: "#FFFF", padding: 20 }}>
-             
               {/* <Text
                 style={{
                   fontSize: 16,
                   color: "#181818",
                   textAlign: "center",
                   marginVertical: 10,
-                  fontWeight: "500",
+                  fontWeight: 500,
                   fontFamily: "Rubik_400Regular",
                 }}
               >
                  Details
               </Text> */}
-              <View style={{
-                flexDirection:'column'
-              }}>
-              {/* <Fontisto
-                name="quote-a-right"
-                size={8}
+              <View
                 style={{
-                 color:"#FF8F0F",
+                  flexDirection: "column",
                 }}
-             /> */}
-              
-              <Text
-                style={{
-                  fontSize: 14,
-                  color: "rgba(130, 130, 130, 1)",
-                  textAlign: "center",
-                  paddingLeft:10,
-                  paddingRight:10,
-                  fontFamily: "Rubik_400Regular",
-                }}
-                selectable={false}
               >
-                 {details.detail}
-              </Text>
-              {/* <Fontisto
-                name="quote-a-left"
-                size={8}
-                style={{
-                 color:"#FF8F0F",
-                 alignSelf:'flex-end'
-                }}
-             /> */}
-              
+                <Icon
+                  name="quote-right"
+                  size={8}
+                  style={{
+                    color: "#FF8F0F",
+                  }}
+                />
+
+                <Text
+                  style={{
+                    fontSize: 14,
+                    color: "rgba(130, 130, 130, 1)",
+                    textAlign: "center",
+                    paddingLeft: 10,
+                    paddingRight: 10,
+                    // fontFamily: "Rubik_400Regular",
+                  }}
+                  selectable={false}
+                >
+                  {details.detail}
+                </Text>
+                <Icon
+                  name="quote-left"
+                  size={8}
+                  style={{
+                    color: "#FF8F0F",
+                    alignSelf: "flex-end",
+                  }}
+                />
               </View>
 
               <View
@@ -262,16 +261,15 @@ const ReviewAllMCQs = (props) => {
                   height: 274,
                   borderRadius: 8,
                   marginVertical: 30,
-                  alignSelf:'center'
+                  alignSelf: "center",
                 }}
-              > 
-
+              >
                 <Image
-                     source={{ uri: details.detailImage }}
-                     style={{ flex: 1 }}
-                     resizeMode="cover"
-                /> 
-               </View> 
+                  source={{ uri: details.detailImage }}
+                  style={{ flex: 1 }}
+                  resizeMode="cover"
+                />
+              </View>
 
               <View
                 style={{
@@ -293,7 +291,7 @@ const ReviewAllMCQs = (props) => {
                     style={{
                       color: "#FFFF",
                       fontSize: 14,
-                      fontFamily: "Rubik_400Regular",
+                      // fontFamily: "Rubik_400Regular",
                     }}
                   >
                     Continue

@@ -8,7 +8,7 @@ import {
   Alert,
   ScrollView,
 } from "react-native";
-// import { Feather, MaterialIcons } from "@expo/vector-icons";
+import { Feather, MaterialIcons } from "@expo/vector-icons";
 import { Image } from "react-native";
 import { Checkbox } from "expo-checkbox";
 import ErrorAlert from "../../components/ErrorAlert";
@@ -144,7 +144,7 @@ function SignUp(props) {
             style={{ marginLeft: 20 }}
             onPress={() => props.navigation.goBack()}
           >
-            {/* <Feather name="arrow-left" size={24} color="white" /> */}
+            <Feather name="arrow-left" size={24} color="white" />
           </TouchableOpacity>
         </View>
         <View style={{ flex: 2, paddingHorizontal: 20 }}>

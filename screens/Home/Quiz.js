@@ -1,6 +1,6 @@
 import { View, Text, TouchableOpacity, FlatList, Alert } from "react-native";
 import React, { useState, useEffect, useCallback } from "react";
-// import { Feather } from "@expo/vector-icons";
+import { Feather } from "@expo/vector-icons";
 import ProgressBar from "../../components/ProgressBar";
 import Pagination from "../../components/Pagination";
 import url from "../../utils/URL";
@@ -16,8 +16,6 @@ import { admobInterestial, baseUrl } from "../../constants/global";
 import PastpapersQuizItem from "../../components/PastpapersQuizItem";
 import { ScrollView } from "react-native-gesture-handler";
 import { OptimizedFlatList } from "react-native-optimized-flatlist";
-
-
 
 const Quiz = (props) => {
   const [mcqs, setMcqs] = useState([]);
@@ -35,104 +33,90 @@ const Quiz = (props) => {
   const [totalWrong, setTotalWrong] = useState(0);
   const [page, setPage] = useState(1);
 
-
-  
-
-  const [type, setType] = useState()
-  const [p, setP] = useState()
-
-
-
+  const [type, setType] = useState();
+  const [p, setP] = useState();
 
   // const [totalMCQs, setTotalMCQs] = useState(10);
   //console.log("Total questions",props.route.params.totalQuestions)
-  
-  
 
-  
-  const renderQuizItem=useCallback(({item, index}) => (
-    <QuizItem
-       item={item}
-       index={index}
-       page={page}
-       mainProps={props}
-       //state_selectedOption={selectedOptions}
-       questionAttemptedItem={(atempt_Item, atempt_Index, atempt_isCorrect)=>{
-              //  console.log("Attempted: "+JSON.stringify(atempt_Item))
-              //  console.log("Attempt Index: "+JSON.stringify(atempt_Index))
-              //  console.log("Attempt Correct: "+JSON.stringify(atempt_isCorrect))
-             setSelectedOptions({
-                               ...selectedOptions,
-                               [atempt_Item.questionid]: atempt_Index,
-                              });
-              if(atempt_isCorrect){
-                 setTotalCorrect(totalCorrect + 1);
-              }else{
-                 setTotalWrong(totalWrong + 1);
-              }                
-                 setQuestionsAttempted(questionsAttempted + 1);
-              }}
-        subselectedItem={selectedOptions}      
-    />
-  ),[selectedOptions, page, displayMcqs]);
+  const renderQuizItem = useCallback(
+    ({ item, index }) => (
+      <QuizItem
+        item={item}
+        index={index}
+        page={page}
+        mainProps={props}
+        //state_selectedOption={selectedOptions}
+        questionAttemptedItem={(
+          atempt_Item,
+          atempt_Index,
+          atempt_isCorrect
+        ) => {
+          //  console.log("Attempted: "+JSON.stringify(atempt_Item))
+          //  console.log("Attempt Index: "+JSON.stringify(atempt_Index))
+          //  console.log("Attempt Correct: "+JSON.stringify(atempt_isCorrect))
+          setSelectedOptions({
+            ...selectedOptions,
+            [atempt_Item.questionid]: atempt_Index,
+          });
+          if (atempt_isCorrect) {
+            setTotalCorrect(totalCorrect + 1);
+          } else {
+            setTotalWrong(totalWrong + 1);
+          }
+          setQuestionsAttempted(questionsAttempted + 1);
+        }}
+        subselectedItem={selectedOptions}
+      />
+    ),
+    [selectedOptions, page, displayMcqs]
+  );
 
-
-
-  
-  const renderPast=(({item, index}) => (
- 
+  const renderPast = ({ item, index }) => (
     <PastpapersQuizItem
-       item={item}
-       index={index}
-       page={page}
-       mainProps={props}
-       //state_selectedOption={selectedOptions}
-       questionAttemptedItem={(atempt_Item, atempt_Index, atempt_isCorrect)=>{
-              //  console.log("Attempted: "+JSON.stringify(atempt_Item))
-              //  console.log("Attempt Index: "+JSON.stringify(atempt_Index))
-              //  console.log("Attempt Correct: "+JSON.stringify(atempt_isCorrect))
-             setSelectedOptions({
-                               ...selectedOptions,
-                               [atempt_Item.questionid]: atempt_Index,
-                              });
-              if(atempt_isCorrect){
-                 setTotalCorrect(totalCorrect + 1);
-              }else{
-                 setTotalWrong(totalWrong + 1);
-              }                
-                 setQuestionsAttempted(questionsAttempted + 1);
-              }}
-        subselectedItem={selectedOptions}      
+      item={item}
+      index={index}
+      page={page}
+      mainProps={props}
+      //state_selectedOption={selectedOptions}
+      questionAttemptedItem={(atempt_Item, atempt_Index, atempt_isCorrect) => {
+        //  console.log("Attempted: "+JSON.stringify(atempt_Item))
+        //  console.log("Attempt Index: "+JSON.stringify(atempt_Index))
+        //  console.log("Attempt Correct: "+JSON.stringify(atempt_isCorrect))
+        setSelectedOptions({
+          ...selectedOptions,
+          [atempt_Item.questionid]: atempt_Index,
+        });
+        if (atempt_isCorrect) {
+          setTotalCorrect(totalCorrect + 1);
+        } else {
+          setTotalWrong(totalWrong + 1);
+        }
+        setQuestionsAttempted(questionsAttempted + 1);
+      }}
+      subselectedItem={selectedOptions}
     >
-      {console.log("Render "+JSON.stringify(item))}
-      </PastpapersQuizItem>
-  ));
+      {console.log("Render " + JSON.stringify(item))}
+    </PastpapersQuizItem>
+  );
 
-
-
-  
-
-  useEffect(()=>{
-    if(isClosed)
-      updatePage()
-     
-  },[isClosed])
-
-
+  // useEffect(() => {
+  //   if (isClosed) updatePage();
+  // }, [isClosed]);
 
   useEffect(() => {
-    if(page%4==0 && !isLoaded){
-       load()
+    if (page % 4 == 0 && !isLoaded) {
+      load();
     }
   }, [page]);
 
-  
-  
   useEffect(() => {
-   if (props.route.params.subjectName === "PPSC" ||
-    props.route.params.subjectName === "FPSC"){
-      getpastMCQs(page)
-    }else{
+    if (
+      props.route.params.subjectName === "PPSC" ||
+      props.route.params.subjectName === "FPSC"
+    ) {
+      getpastMCQs(page);
+    } else {
       getMCQs(page);
     }
   }, [page]);
@@ -140,7 +124,7 @@ const Quiz = (props) => {
   let [fontsLoaded] = useFonts({
     Rubik_400Regular,
   });
-  
+
   useFocusEffect(
     useCallback(() => {
       setPage(1);
@@ -153,15 +137,14 @@ const Quiz = (props) => {
     }, [])
   );
 
-
   const getpastMCQs = async (page) => {
-    setLoading(true)
+    setLoading(true);
     let user = await AsyncStorage.getItem("persist:auth");
     let token = JSON.parse(user).token.slice(1, -1);
-    console.log("totalQuestions "+(props.route.params.totalQuestions))
-    console.log("number of quizes "+(page * props.route.params.showQuestions))
-    console.log("questionslimit "+(props.route.params.showQuestions))
-   
+    console.log("totalQuestions " + props.route.params.totalQuestions);
+    console.log("number of quizes " + page * props.route.params.showQuestions);
+    console.log("questionslimit " + props.route.params.showQuestions);
+
     // subjectid: props.route.params.id,
     // chapterid: "full",
     // offset: (props.page - 1) * 10,
@@ -169,14 +152,13 @@ const Quiz = (props) => {
     // userid: 2,
     // sessionid: Math.trunc(Date.now() / 1000),
 
-
     let data = {
       subjectid: props.route.params.subjectid,
       chapterid: props.route.params.chapterid,
       userid: props.auth.user.id,
       questionslimit: props.route.params.totalQuestions,
       sessionid: Math.trunc(Date.now() / 1000),
-      offset: (page-1) * props.route.params.showQuestions,
+      offset: (page - 1) * props.route.params.showQuestions,
     };
     const searchParams = new URLSearchParams();
     for (const key in data) {
@@ -198,8 +180,7 @@ const Quiz = (props) => {
             setMcqs([...mcqs, ...data.data]);
 
             setDisplayMcqs(data.data);
-             console.log("quizes "+JSON.stringify(data.data.length))
-   
+            console.log("quizes " + JSON.stringify(data.data.length));
           }
           setLoading(false);
           setRefreshing(false);
@@ -209,7 +190,7 @@ const Quiz = (props) => {
             {
               text: "Ok",
               onPress: () => {
-               // props.navigation.navigate("SignIn");
+                // props.navigation.navigate("SignIn");
                 props.logout();
               },
             },
@@ -219,7 +200,7 @@ const Quiz = (props) => {
             {
               text: "Ok",
               onPress: () => {
-               // props.navigation.navigate("SignIn");
+                // props.navigation.navigate("SignIn");
                 props.logout();
               },
             },
@@ -233,23 +214,21 @@ const Quiz = (props) => {
       });
   };
 
-
-
   const getMCQs = async (page) => {
-    setLoading(true)
+    setLoading(true);
     let user = await AsyncStorage.getItem("persist:auth");
     let token = JSON.parse(user).token.slice(1, -1);
-    console.log("totalQuestions "+(props.route.params.totalQuestions))
-    console.log("number of quizes "+(page * props.route.params.showQuestions))
-    console.log("questionslimit "+(props.route.params.showQuestions))
-   
+    console.log("totalQuestions " + props.route.params.totalQuestions);
+    console.log("number of quizes " + page * props.route.params.showQuestions);
+    console.log("questionslimit " + props.route.params.showQuestions);
+
     let data = {
       subjectid: props.route.params.subjectid,
       chapterid: props.route.params.chapterid,
       userid: props.auth.user.id,
       questionslimit: props.route.params.showQuestions,
       sessionid: Math.trunc(Date.now() / 1000),
-      offset: (page-1) * props.route.params.showQuestions,
+      offset: (page - 1) * props.route.params.showQuestions,
     };
     const searchParams = new URLSearchParams();
     for (const key in data) {
@@ -270,8 +249,7 @@ const Quiz = (props) => {
           if (data.data) {
             setMcqs([...mcqs, ...data.data]);
             setDisplayMcqs(data.data);
-            console.log("quizes "+JSON.stringify(data.data))
-   
+            console.log("quizes " + JSON.stringify(data.data));
           }
           setLoading(false);
           setRefreshing(false);
@@ -281,7 +259,7 @@ const Quiz = (props) => {
             {
               text: "Ok",
               onPress: () => {
-               // props.navigation.navigate("SignIn");
+                // props.navigation.navigate("SignIn");
                 props.logout();
               },
             },
@@ -291,7 +269,7 @@ const Quiz = (props) => {
             {
               text: "Ok",
               onPress: () => {
-               // props.navigation.navigate("SignIn");
+                // props.navigation.navigate("SignIn");
                 props.logout();
               },
             },
@@ -305,55 +283,23 @@ const Quiz = (props) => {
       });
   };
 
-
-  
-  const preupdatePage=async(type, p)=>{
-    setType(type)
-    setP(p)
-    if(page%4==0 && isLoaded){
-      show()
-    }else{
-      updatePageSkipAd(type, p)
-    }
-
-
-}
-
-
-
-const updatePageSkipAd = (type, p) => {
-  if (type === "inc") {
-    if (page * 10 === mcqs.length) {
-      if (page < (Math.trunc(props.route.params.totalQuestions / 10)+1)) {
-        setPage(page + 1);
-        setLoadingData(true);
-        getMCQs(page + 1);          
-      }
+  const preupdatePage = async (type, p) => {
+    setType(type);
+    setP(p);
+    if (page % 4 == 0 && isLoaded) {
+      show();
     } else {
-      setPage(page + 1);
-      setDisplayMcqs(mcqs.slice(page * 10, (page + 1) * 10));
+      updatePageSkipAd(type, p);
     }
-  } else if (type === "dec") {
-    if (page > 1) {
-      setPage(page - 1);
-      setDisplayMcqs(mcqs.slice((page - 1) * 10, page * 10));
-      // setLoadingData(true);
-    }
-  } else {
-    setPage(p);
-    setLoadingData(true);
-    getMCQs(p);
-  }
-};
+  };
 
-
-  const updatePage = () => {
+  const updatePageSkipAd = (type, p) => {
     if (type === "inc") {
       if (page * 10 === mcqs.length) {
-        if (page < (Math.trunc(props.route.params.totalQuestions / 10)+1)) {
+        if (page < Math.trunc(props.route.params.totalQuestions / 10) + 1) {
           setPage(page + 1);
           setLoadingData(true);
-          getMCQs(page + 1);          
+          getMCQs(page + 1);
         }
       } else {
         setPage(page + 1);
@@ -372,7 +318,31 @@ const updatePageSkipAd = (type, p) => {
     }
   };
 
- 
+  const updatePage = () => {
+    if (type === "inc") {
+      if (page * 10 === mcqs.length) {
+        if (page < Math.trunc(props.route.params.totalQuestions / 10) + 1) {
+          setPage(page + 1);
+          setLoadingData(true);
+          getMCQs(page + 1);
+        }
+      } else {
+        setPage(page + 1);
+        setDisplayMcqs(mcqs.slice(page * 10, (page + 1) * 10));
+      }
+    } else if (type === "dec") {
+      if (page > 1) {
+        setPage(page - 1);
+        setDisplayMcqs(mcqs.slice((page - 1) * 10, page * 10));
+        // setLoadingData(true);
+      }
+    } else {
+      setPage(p);
+      setLoadingData(true);
+      getMCQs(p);
+    }
+  };
+
   if (loading) {
     return <Loading />;
   }
@@ -390,7 +360,7 @@ const updatePageSkipAd = (type, p) => {
           style={{ marginRight: 20 }}
           onPress={() => props.navigation.goBack()}
         >
-          {/* <Feather name="arrow-left" size={24} color="black" /> */}
+          <Feather name="arrow-left" size={24} color="black" />
         </TouchableOpacity>
         <Text
           style={{
@@ -469,16 +439,13 @@ const updatePageSkipAd = (type, p) => {
                 contentContainerStyle={{ paddingBottom: 50 }}
                 showsVerticalScrollIndicator={false}
                 removeClippedSubviews={true}
-      
                 windowSize={10}
                 initialNumToRender={10}
-                
                 ListFooterComponent={
                   (mcqs.length !== 0 &&
                     props.route.params.subjectName === "PPSC") ||
                   props.route.params.subjectName === "FPSC" ? (
                     <View>
-                     
                       <TouchableOpacity
                         style={{
                           paddingVertical: 15,
@@ -533,15 +500,15 @@ const updatePageSkipAd = (type, p) => {
                 //   setSelectedOptions({});
                 //   setPage(1);
                 // }}
-               // refreshing={refreshing}
+                // refreshing={refreshing}
                 renderItem={renderQuizItem}
               />
-             )}
-            </> 
+            )}
           </>
+        </>
       )}
 
-{mcqs.length !== 0 &&
+      {mcqs.length !== 0 &&
         props.route.params.subjectName !== "PPSC" &&
         props.route.params.subjectName !== "FPSC" && (
           <Pagination

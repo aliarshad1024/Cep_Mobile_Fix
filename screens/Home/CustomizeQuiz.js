@@ -15,7 +15,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { connect } from "react-redux";
 import { logout } from "../../redux/actions/authActions";
 import { useFonts } from "expo-font";
-// import { MaterialIcons, Feather, Entypo } from "@expo/vector-icons";
+import { MaterialIcons, Feather, Entypo } from "@expo/vector-icons";
 import Footer from "../../components/Footer";
 import { Rubik_400Regular } from "@expo-google-fonts/rubik";
 import { SelectList } from "react-native-dropdown-select-list";
@@ -287,7 +287,7 @@ const CustomizeQuiz = (props) => {
             style={{ marginRight: 20 }}
             onPress={() => props.navigation.goBack()}
           >
-            {/* <Feather name="arrow-left" size={24} color="black" /> */}
+            <Feather name="arrow-left" size={24} color="black" />
           </TouchableOpacity>
           <Text
             style={{
@@ -412,7 +412,7 @@ const CustomizeQuiz = (props) => {
                   borderColor: "rgba(189, 189, 189, 1)",
                 }}
               >
-                {/* <MaterialIcons name="search" size={17} color="#BDBDBD" /> */}
+                <MaterialIcons name="search" size={17} color="#BDBDBD" />
                 <TextInput
                   style={{
                     marginLeft: 5,
@@ -806,7 +806,7 @@ const CustomizeQuiz = (props) => {
                         onPress={() => removeCustomizeQuiz(index)}
                         style={{ alignItems: "flex-end" }}
                       >
-                        {/* <Entypo name="cross" size={20} color="black" /> */}
+                        <Entypo name="cross" size={20} color="black" />
                       </TouchableOpacity>
                     )}
                   </View>

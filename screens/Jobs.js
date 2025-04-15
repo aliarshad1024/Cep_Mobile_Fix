@@ -10,7 +10,7 @@ import {
   ToastAndroid
 } from "react-native";
 import React, { useState, useEffect } from "react";
-// import { Feather, FontAwesome } from "@expo/vector-icons";
+import { Feather, FontAwesome } from "@expo/vector-icons";
 import Footer from "../components/Footer";
 import Loading from "../components/Loading";
 import url from "../utils/URL";
@@ -289,7 +289,7 @@ const Jobs = (props) => {
             style={{ marginRight: 20 }}
             onPress={() => props.navigation.goBack()}
           >
-            {/* <Feather name="arrow-left" size={24} color="black" /> */}
+            <Feather name="arrow-left" size={24} color="black" />
           </TouchableOpacity>
           <Text
             style={{
@@ -409,7 +409,7 @@ const Jobs = (props) => {
                     setLoading(true);
                   }}
                 >
-                  {/* {item.bookmarked === 0 ? (
+                  {item.bookmarked === 0 ? (
                     <Feather
                       style={styles.rightMarginA}
                       name="bookmark"
@@ -423,7 +423,7 @@ const Jobs = (props) => {
                       size={22}
                       color="gold"
                     />
-                  )} */}
+                  )}
                 </TouchableOpacity>
               </View>
 
@@ -433,15 +433,15 @@ const Jobs = (props) => {
                 <View
                   style={styles.pdfContainer}
                 >
-                  {/* <Feather
+                  <Feather
                     name="file-text"
                     size={24}
                     color="rgba(203, 16, 0, 1)"
-                  /> */}
-                  {/* <Image
+                  />
+                  <Image
                     source={require("../assets/icons/pdf.png")}
                     style={styles.imageIcon}
-                  /> */}
+                  />
                   <Text
                     style={styles.pdfText}
                     selectable={false}
@@ -458,7 +458,7 @@ const Jobs = (props) => {
                   }}
                   disabled={downloadingFileId === item.id}
                 >
-                  {/* {downloadingFileId === item.id && downloadStarted ? (
+                  {downloadingFileId === item.id && downloadStarted ? (
                     <Image
                       // source={require ("../../assets/icons/downloading.png")}
                       source={require("../assets/icons/downloading.png")}
@@ -470,7 +470,7 @@ const Jobs = (props) => {
                       size={26}
                       color="rgba(12, 229, 191, 1)"
                     />
-                  )} */}
+                  )}
                 </TouchableOpacity>
               </View>
             </View>
