@@ -21,7 +21,7 @@ import ChapterItem from "../../components/ChapterItem";
 import { admobInterestial, baseUrl } from "../../constants/global";
 // import {BannerAd, BannerAdSize, RewardedAd, TestIds, AdEventType, RewardedAdEventType, RewardedInterstitialAd, useRewardedInterstitialAd, useInterstitialAd} from 'react-native-google-mobile-ads';
 
-const SelectChapter = (props) => {
+const SelectChapter = ({ testType, setTestType, ...props }) => {
   const [loading, setLoading] = useState(true);
   const [chapters, setChapters] = useState([]);
   const [displayChapters, setDisplayChapters] = useState([]);
@@ -60,6 +60,9 @@ const SelectChapter = (props) => {
         item={item}
         openOptions={openOptions}
         index={index}
+        {...props}
+        testType={testType}
+        setTestType={setTestType}
         mcqsClicked={(clickedItem, clickedIndex) => {
           //  if(isLoaded){
           //   show()

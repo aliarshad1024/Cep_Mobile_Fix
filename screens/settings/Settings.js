@@ -242,7 +242,7 @@ const Settings = (props) => {
           }
           style={{ flexDirection: "row", marginBottom: 18 }}
         >
-          <Feather name="share-2" size={24} color={props.auth.themeMainColor} />
+          {/* <Feather name="share-2" size={24} color={props.auth.themeMainColor} /> */}
           <Text
             style={{
               fontSize: 14,
@@ -279,7 +279,7 @@ const Settings = (props) => {
           onPress={() => props.logout()}
           style={{ flexDirection: "row", marginBottom: 18 }}
         >
-          <Feather name="log-out" size={24} color="rgba(238, 85, 0, 1)" />
+          {/* <Feather name="log-out" size={24} color="rgba(238, 85, 0, 1)" /> */}
           <Text
             style={{
               fontSize: 14,

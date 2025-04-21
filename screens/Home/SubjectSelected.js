@@ -19,7 +19,9 @@ const SubjectSelected = (props) => {
   const [testType, setTestType] = useState(
     props.route.params.testType ? props.route.params.testType : "Chapters"
   );
+  // const testTypesArray = ["Chapters", "Review MCQs", "Attempt MCQs"];
   const testTypesArray = ["Chapters", "Review MCQs", "Attempt MCQs"];
+
   const [page, setPage] = useState(1);
   const [timeStarted, setTimeStarted] = useState(null);
 
@@ -206,7 +208,7 @@ const SubjectSelected = (props) => {
             justifyContent: "space-between",
           }}
         >
-          {testTypesArray.map((item, index) => (
+          {/* {testTypesArray.map((item, index) => (
             <TouchableOpacity
               style={{
                 flex: 1,
@@ -246,11 +248,15 @@ const SubjectSelected = (props) => {
                 </Text>
               </View>
             </TouchableOpacity>
-          ))}
+          ))} */}
         </View>
       )}
       {testType === "Chapters" ? (
-        <SelectChapter {...props} />
+        <SelectChapter
+        {...props}
+        testType={testType}
+        setTestType={setTestType}
+      />
       ) : testType === "Attempt MCQs" ? (
         <AttemptAllMCQs
           {...props}
