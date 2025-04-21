@@ -84,6 +84,8 @@ export default function App() {
       <PersistGate loading={null} persistor={persistor}>
         <NavigationContainer>
           <NavigationDecider />
+          {/* <TabNavigator />  */}
+
         </NavigationContainer>
       </PersistGate>
     </Provider>

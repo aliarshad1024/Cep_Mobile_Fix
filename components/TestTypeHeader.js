@@ -13,7 +13,7 @@ const TestTypeHeader = (props) => {
     >
       <View
         style={{
-          padding: 30,
+          padding: 20,
         }}
       >
         <View
@@ -28,7 +28,7 @@ const TestTypeHeader = (props) => {
           <View>
             <Greetings />
 
-            <Text
+            {/* <Text
               style={{
                 fontSize: 18,
                 fontWeight: "500",
@@ -36,10 +36,10 @@ const TestTypeHeader = (props) => {
               }}
             >
               {props.auth.user?.fullname}
-            </Text>
+            </Text> */}
           </View>
           <TouchableOpacity
-            onPress={() => props.navigation.navigate("Profile")}
+            // onPress={() => props.navigation.navigate("Profile")}
           >
             <Image
               style={{
@@ -47,11 +47,12 @@ const TestTypeHeader = (props) => {
                 height: 45,
                 borderRadius: 204,
                 borderWidth: 1,
-                borderColor: "#FFF",
+                borderColor:props.auth.themeMainColor,
+                backgroundColor:"white"
               }}
               source={
                 !props.auth.picture
-                  ? require("../assets/profilePicture.jpg")
+                  ? require("../assets/icons/cake.png")
                   : { uri: props.auth.picture }
               }
               resizeMode="contain"

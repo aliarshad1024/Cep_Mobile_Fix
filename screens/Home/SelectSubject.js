@@ -394,7 +394,7 @@ const SelectSubject = (props) => {
           >
             <View>
               <Greetings />
-              <Text
+              {/* <Text
                 style={{
                   fontSize: 18,
                   fontWeight: 500,
@@ -402,7 +402,7 @@ const SelectSubject = (props) => {
                 }}
               >
                 {props.auth.user?.fullname}
-              </Text>
+              </Text> */}
             </View>
             <Image
               style={{
@@ -411,10 +411,11 @@ const SelectSubject = (props) => {
                 borderRadius: 204,
                 borderWidth: 1,
                 borderColor: "#FFF",
+                backgroundColor:"white"
               }}
               source={
                 !props.auth.picture
-                  ? require("../../assets/profilePicture.jpg")
+                  ? require("../../assets/icons/cake.png")
                   : { uri: props.auth.picture }
               }
               resizeMode="contain"

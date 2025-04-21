@@ -87,7 +87,8 @@ const Settings = (props) => {
                 marginLeft: 20,
                 color: "#FFF",
                 fontSize: 18,
-                fontWeight: "500",                fontFamily: "Rubik_400Regular",
+                fontWeight: "500",
+                fontFamily: "Rubik_400Regular",
               }}
             >
               Settings
@@ -95,7 +96,7 @@ const Settings = (props) => {
           </View>
         </View>
 
-        <View style={{ alignItems: "center", marginTop: 20 }}>
+        {/* <View style={{ alignItems: "center", marginTop: 20 }}>
           <View>
             <Image
               style={{
@@ -133,7 +134,7 @@ const Settings = (props) => {
           >
             {props.auth.user?.email}
           </Text>
-        </View>
+        </View> */}
       </View>
       <View style={{ marginHorizontal: 30, marginVertical: 20 }}>
         <View
@@ -146,7 +147,8 @@ const Settings = (props) => {
         >
           <Text
             style={{
-              fontWeight: "600",              fontSize: 20,
+              fontWeight: "600",
+              fontSize: 20,
               fontFamily: "Rubik_400Regular",
               color: "rgba(24, 24, 24, 1)",
             }}
@@ -184,7 +186,8 @@ const Settings = (props) => {
             <Text
               style={{
                 fontSize: 14,
-                fontWeight: "500",                marginLeft: 20,
+                fontWeight: "500",
+                marginLeft: 20,
                 fontFamily: "Rubik_400Regular",
               }}
             >
@@ -225,7 +228,8 @@ const Settings = (props) => {
           <Text
             style={{
               fontSize: 14,
-              fontWeight: "600",              marginLeft: 20,
+              fontWeight: "600",
+              marginLeft: 20,
               fontFamily: "Rubik_400Regular",
             }}
           >
@@ -246,7 +250,8 @@ const Settings = (props) => {
           <Text
             style={{
               fontSize: 14,
-              fontWeight: "600",              marginLeft: 20,
+              fontWeight: "600",
+              marginLeft: 20,
               fontFamily: "Rubik_400Regular",
             }}
           >
@@ -267,7 +272,8 @@ const Settings = (props) => {
           <Text
             style={{
               fontSize: 14,
-              fontWeight: "600",              marginLeft: 22,
+              fontWeight: "600",
+              marginLeft: 22,
               fontFamily: "Rubik_400Regular",
             }}
           >
@@ -275,11 +281,10 @@ const Settings = (props) => {
           </Text>
         </TouchableOpacity>
 
-        <TouchableOpacity
+        {/* <TouchableOpacity
           onPress={() => props.logout()}
           style={{ flexDirection: "row", marginBottom: 18 }}
         >
-          {/* <Feather name="log-out" size={24} color="rgba(238, 85, 0, 1)" /> */}
           <Text
             style={{
               fontSize: 14,
@@ -290,8 +295,8 @@ const Settings = (props) => {
           >
             Logout
           </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
+        </TouchableOpacity> */}
+        {/* <TouchableOpacity
           onPress={() => setConfirmDeletion(true)}
           style={{
             flexDirection: "row",
@@ -303,11 +308,7 @@ const Settings = (props) => {
             borderRadius: 20,
           }}
         >
-          {/* <MaterialIcons
-            name="delete-outline"
-            size={24}
-            color="rgba(238, 85, 0, 1)"
-          /> */}
+       
           <Text
             style={{
               fontSize: 14,
@@ -318,7 +319,7 @@ const Settings = (props) => {
           >
             Delete Account
           </Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
       <Footer {...props} />
       <Modal

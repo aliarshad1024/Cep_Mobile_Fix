@@ -270,7 +270,7 @@ const TestType = (props) => {
 
       </View>
         <FlatList
-          style={{marginBottom:150}} 
+          style={{marginBottom:50}} 
           data={exams}
           numColumns={1}
           contentContainerStyle={{ paddingBottom: 70 }}

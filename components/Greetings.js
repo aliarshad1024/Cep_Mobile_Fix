@@ -18,26 +18,26 @@ const Greetings = () => {
   }, []);
 
   return (
-    <View style={{ marginBottom: 10 }}>
+    <View>
       {timeOfDay === "morning" && (
         <View style={{ flexDirection: "row", alignItems: "center" }}>
           <Image
             source={require("../assets/icons/morning.png")}
-            style={{ width: 15, height: 15 }}
+            style={{ width: 25, height: 25 }}
           />
-          <Text style={{ marginLeft: 10, fontSize: 13,color:'white' }}>Good Morning!</Text>
+          <Text style={{ marginLeft: 10, fontSize: 16,color:'white',fontWeight:"600" }}>Good Morning!</Text>
         </View>
       )}
       {timeOfDay === "afternoon" && (
         <View style={{ flexDirection: "row", alignItems: "center" }}>
-          <Ionicons name="ios-partly-sunny" size={15} color="yellow" />
-          <Text style={{ marginLeft: 10, fontSize: 13,color:'white' }}>Good Afternoon!</Text>
+          <Ionicons name="ios-partly-sunny" size={25} color="yellow" />
+          <Text style={{ marginLeft: 10, fontSize: 16,color:'white',fontWeight:"600" }}>Good Afternoon!</Text>
         </View>
       )}
       {timeOfDay === "night" && (
         <View style={{ flexDirection: "row", alignItems: "center" }}>
-          <Ionicons name="ios-moon" size={15} color="white" />
-          <Text style={{ marginLeft: 10, fontSize: 13,color:'white' }}>
+          <Ionicons name="ios-moon" size={25} color="white" />
+          <Text style={{ marginLeft: 10, fontSize: 16,color:'white', fontWeight:"600" }}>
             Good Evening!
           </Text>
         </View>

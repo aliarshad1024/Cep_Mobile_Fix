@@ -160,7 +160,7 @@ const Footer = (props) => {
           />
         )}
       </TouchableOpacity>
-      <TouchableOpacity
+      {/* <TouchableOpacity
         style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
         onPress={() => props.navigation.navigate("Profile")}
       >
@@ -186,7 +186,7 @@ const Footer = (props) => {
             }}
           />
         )}
-      </TouchableOpacity>
+      </TouchableOpacity> */}
       <TouchableOpacity
         style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
         onPress={() => props.navigation.navigate("Settings")}
