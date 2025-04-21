@@ -42,7 +42,9 @@ function SignIn(props) {
     // Perform auto login on mount
     if (fontsLoaded) {
       setLoading(true);
-      dispatch(login({ email: "ali@gmail.com", password: "123456789" }));
+      dispatch(
+        login({ email: "guestfix123@gmail.com", password: "Guest_Fix@#$&123" })
+      );
     }
   }, [fontsLoaded]);
 
@@ -62,17 +64,36 @@ function SignIn(props) {
   }
 
   return (
-    <ScrollView style={{ flex: 1, backgroundColor: "white", paddingVertical: 15 }}>
+    <ScrollView
+      style={{ flex: 1, backgroundColor: "white", paddingVertical: 15 }}
+    >
       <View style={{ alignItems: "center" }}>
-        <Image source={require("../../assets/logo.png")} style={{ width: 78, height: 33 }} />
+        <Image
+          source={require("../../assets/logo.png")}
+          style={{ width: 78, height: 33 }}
+        />
       </View>
 
       <View style={{ flex: 2, paddingHorizontal: 20, marginTop: 45 }}>
-        <Text style={{ fontSize: 24, fontFamily: "Rubik_400Regular" }}>Sign in</Text>
-        <Text style={{ color: "rgba(139, 139, 139, 1)", marginTop: 20, fontFamily: "Rubik_400Regular" }}>
+        <Text style={{ fontSize: 24, fontFamily: "Rubik_400Regular" }}>
+          Sign in
+        </Text>
+        <Text
+          style={{
+            color: "rgba(139, 139, 139, 1)",
+            marginTop: 20,
+            fontFamily: "Rubik_400Regular",
+          }}
+        >
           Welcome back!
         </Text>
-        <Text style={{ color: "rgba(139, 139, 139, 1)", marginBottom: 20, fontFamily: "Rubik_400Regular" }}>
+        <Text
+          style={{
+            color: "rgba(139, 139, 139, 1)",
+            marginBottom: 20,
+            fontFamily: "Rubik_400Regular",
+          }}
+        >
           Please wait while we sign you in...
         </Text>
 
