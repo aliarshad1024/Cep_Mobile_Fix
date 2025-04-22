@@ -106,7 +106,7 @@ const CustomizeQuiz = (props) => {
           {
             text: "Ok",
             onPress: () => {
-           //   props.navigation.navigate("SignIn");
+              //   props.navigation.navigate("SignIn");
               props.logout();
             },
           },
@@ -138,7 +138,7 @@ const CustomizeQuiz = (props) => {
           {
             text: "Ok",
             onPress: () => {
-             // props.navigation.navigate("SignIn");
+              // props.navigation.navigate("SignIn");
               props.logout();
             },
           },
@@ -163,7 +163,7 @@ const CustomizeQuiz = (props) => {
             {
               text: "Ok",
               onPress: () => {
-               // props.navigation.navigate("SignIn");
+                // props.navigation.navigate("SignIn");
                 props.logout();
               },
             },
@@ -184,12 +184,28 @@ const CustomizeQuiz = (props) => {
     return <Loading />;
   }
 
+  // const searchQuiz = (searchKeyword) => {
+  //   if (searchKeyword === "") {
+  //     setDisplaySavedQuizzes(savedQuizzes);
+  //   } else {
+  //     let filteredQuizzes = savedQuizzes.filter((quiz) =>
+  //       quiz.quizname.toLowerCase().includes(searchKeyword.toLowerCase())
+  //     );
+  //     setDisplaySavedQuizzes(filteredQuizzes);
+  //   }
+  // };
+
   const searchQuiz = (searchKeyword) => {
+    if (!Array.isArray(savedQuizzes)) {
+      setDisplaySavedQuizzes([]); // or handle as needed
+      return;
+    }
+
     if (searchKeyword === "") {
       setDisplaySavedQuizzes(savedQuizzes);
     } else {
-      let filteredQuizzes = savedQuizzes.filter((quiz) =>
-        quiz.quizname.toLowerCase().includes(searchKeyword.toLowerCase())
+      const filteredQuizzes = savedQuizzes.filter((quiz) =>
+        quiz.quizname?.toLowerCase().includes(searchKeyword.toLowerCase())
       );
       setDisplaySavedQuizzes(filteredQuizzes);
     }
@@ -584,7 +600,7 @@ const CustomizeQuiz = (props) => {
                   fontWeight: "400",
                   color: "rgba(139, 139, 139, 1)",
                   fontSize: 16,
-                  textAlign:'center'
+                  textAlign: "center",
                 }}
               >
                 No Customize Quiz Saved
@@ -605,7 +621,7 @@ const CustomizeQuiz = (props) => {
           >
             Make your own test
           </Text>
-       
+
           <FlatList
             data={customizeQuiz}
             numColumns={1}
@@ -742,13 +758,15 @@ const CustomizeQuiz = (props) => {
 
                       marginTop: 20,
                       alignItems: "center",
-                      backgroundColor: !quizUpdate
-                      &&
-                      (quizName === "" ||
-                        customizeQuiz[0].mcqs === "" ||
-                        customizeQuiz[0].subjectname === "Select a subject")
-                        ? 'lightgray': !quizUpdate ? props.auth.themeMainColor
-                        : "red",
+                      backgroundColor:
+                        !quizUpdate &&
+                        (quizName === "" ||
+                          customizeQuiz[0].mcqs === "" ||
+                          customizeQuiz[0].subjectname === "Select a subject")
+                          ? "lightgray"
+                          : !quizUpdate
+                          ? props.auth.themeMainColor
+                          : "red",
                     }}
                     disabled={
                       !quizUpdate &&
