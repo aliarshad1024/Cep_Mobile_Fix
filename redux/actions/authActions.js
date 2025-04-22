@@ -44,6 +44,8 @@ export const login = (data) => (dispatch) => {
       console.log("Login response : " + JSON.stringify(data));
 
       if (data.message === "Login successful") {
+        console.log("User token:", data.access_token); // 👈 ADD THIS LINE
+
         if (data.data.displaypicture) {
           // Fetch picture only if displaypicture exists
           let dataForImage = {

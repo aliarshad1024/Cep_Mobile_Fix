@@ -52,11 +52,11 @@ const MCQs = (props) => {
 
 
 
-  useEffect(() => {
-    if(page%4==0 && !isLoaded){
-       load()
-    }
-  }, [page]);
+  // useEffect(() => {
+  //   if(page%4==0 && !isLoaded){
+  //      load()
+  //   }
+  // }, [page]);
 
 
   
@@ -153,17 +153,49 @@ const delay = ms => new Promise(
 );
   
   
-  const preupdatePage=async(type, p)=>{
-        setType(type)
-        setP(p)
-        if(page%4==0 && isLoaded){
-          show()
-        }else{
-          updatePageSkipAd(type, p)
-        }
+  // const preupdatePage=async(type, p)=>{
+  //       setType(type)
+  //       setP(p)
+  //       if(page%4==0 && isLoaded){
+  //         show()
+  //       }else{
+  //         updatePageSkipAd(type, p)
+  //       }
 
 
-  }
+  // }
+
+  const preupdatePage = async (type, p) => {
+    updatePageSkipAd(type, p);
+  };
+  
+  const updatePageSkipAd = (type, p) => {
+    console.log("inside updatePage");
+    console.log("type " + type);
+  
+    let nextPage = page;
+  
+    if (type === "inc") {
+      const maxPages = Math.ceil(props.route.params.totalQuestions / 10);
+      if (page < maxPages) {
+        nextPage = page + 1;
+      } else {
+        return; // already at last page
+      }
+    } else if (type === "dec") {
+      if (page > 1) {
+        nextPage = page - 1;
+      } else {
+        return; // already at first page
+      }
+    } else if (typeof p === "number") {
+      nextPage = p;
+    }
+  
+    setPage(nextPage);
+    setLoading(true);
+    getMCQs(nextPage);
+  };
 
 
 
@@ -193,33 +225,33 @@ const delay = ms => new Promise(
   };
 
 
-  const updatePageSkipAd = (type, p) => {
-    console.log("inside updatePage")
-    console.log("type "+type)
-    if (type === "inc") {
-      if (page * 10 === mcqs.length) {
-        if (page < (Math.trunc(props.route.params.totalQuestions / 10)+1)) {
-          setPage(page + 1);
-          setLoadingData(true);
-          console.log("page "+page)
+  // const updatePageSkipAd = (type, p) => {
+  //   console.log("inside updatePage")
+  //   console.log("type "+type)
+  //   if (type === "inc") {
+  //     if (page * 10 === mcqs.length) {
+  //       if (page < (Math.trunc(props.route.params.totalQuestions / 10)+1)) {
+  //         setPage(page + 1);
+  //         setLoadingData(true);
+  //         console.log("page "+page)
     
-          getMCQs(page + 1);
-        }
-      } else {
-        setPage(page + 1);
-        setDisplayMcqs(mcqs.slice(page * 10, (page + 1) * 10));
-      }
-    } else if(type === "dec") {
-      if (page > 1) {
-        setPage(page - 1);
-        setDisplayMcqs(mcqs.slice((page - 1) * 10, page * 10));
-      }
-    } else {
-      setPage(p)
-      setLoadingData(true);
-      getMCQs(p);
-    }
-  }; 
+  //         getMCQs(page + 1);
+  //       }
+  //     } else {
+  //       setPage(page + 1);
+  //       setDisplayMcqs(mcqs.slice(page * 10, (page + 1) * 10));
+  //     }
+  //   } else if(type === "dec") {
+  //     if (page > 1) {
+  //       setPage(page - 1);
+  //       setDisplayMcqs(mcqs.slice((page - 1) * 10, page * 10));
+  //     }
+  //   } else {
+  //     setPage(p)
+  //     setLoadingData(true);
+  //     getMCQs(p);
+  //   }
+  // }; 
 
 
 
@@ -234,6 +266,7 @@ const delay = ms => new Promise(
         padding: 30,
         backgroundColor: "white",
         height: "100%",
+        marginTop:20
       }}
     >
       <View style={{ flexDirection: "row" }}>

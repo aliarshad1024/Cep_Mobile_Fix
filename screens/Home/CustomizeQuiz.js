@@ -269,7 +269,7 @@ const CustomizeQuiz = (props) => {
     <View
       style={{
         paddingHorizontal: 20,
-        paddingTop: 20,
+        paddingTop: 50,
         paddingBottom: 60,
         height: "100%",
         backgroundColor: "white",
@@ -298,7 +298,7 @@ const CustomizeQuiz = (props) => {
               fontFamily: "Rubik_400Regular",
             }}
           >
-            Customize Quiz
+            Mock Exam
           </Text>
         </View>
         {/* <View>
@@ -345,7 +345,7 @@ const CustomizeQuiz = (props) => {
               }}
               selectable={false}
             >
-              Saved Quizzes
+              Saved Mock Exam
             </Text>
           </View>
         </TouchableOpacity>
@@ -390,7 +390,7 @@ const CustomizeQuiz = (props) => {
               }}
               selectable={false}
             >
-              Create New Quiz
+              Create Mock Exam
             </Text>
           </View>
         </TouchableOpacity>

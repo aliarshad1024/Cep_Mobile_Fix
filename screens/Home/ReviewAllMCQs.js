@@ -20,6 +20,7 @@ import { logout } from "../../redux/actions/authActions";
 import MCQItem from "../../components/MCQItem";
 import { baseUrl } from "../../constants/global";
 import Icon from "react-native-vector-icons/FontAwesome";
+import { AntDesign, Feather, FontAwesome } from "@expo/vector-icons";
 
 // import {
 //   BannerAd,
@@ -39,13 +40,23 @@ const ReviewAllMCQs = (props) => {
   const [refreshing, setRefreshing] = useState(false);
   const [details, setDetails] = useState("");
   const [mcqs, setMcqs] = useState([]);
+  const [page, setPage] = useState(1);
+  const [type, setType] = useState();
+  const [p, setP] = useState();
+  const [loadingData, setLoadingData] = useState(false);
+  const [displayMcqs, setDisplayMcqs] = useState([]);
+  const [isLoaded, setIsLoaded] = useState(true);
+
+  useEffect(() => {
+    console.log("ReviewAllMCQs props.route.params:", props.route?.params);
+  }, []);
 
   const renderMCQItem = useCallback(
     ({ item, index }) => (
       <MCQItem
         item={item}
         index={index}
-        page={props.page}
+        page={page}
         mainProps={props}
         isReview={true}
         showDetailModal={(det, detType, detImage) => {
@@ -59,69 +70,100 @@ const ReviewAllMCQs = (props) => {
         }}
       />
     ),
-    [props.page]
+    [page]
   );
 
   useEffect(() => {
     getReviewMCQs(1);
   }, [props.page]);
 
+  const preupdatePage = async (type, p) => {
+    updatePageSkipAd(type, p);
+  };
+  
+  const updatePageSkipAd = (type, p) => {
+    console.log("inside updatePage");
+    console.log("type " + type);
+  
+    let nextPage = page;
+  
+    if (type === "inc") {
+      const maxPages = Math.ceil(props.route.params.totalQuestions / 10);
+      if (page < maxPages) {
+        nextPage = page + 1;
+      } else {
+        return; // already at last page
+      }
+    } else if (type === "dec") {
+      if (page > 1) {
+        nextPage = page - 1;
+      } else {
+        return; // already at first page
+      }
+    } else if (typeof p === "number") {
+      nextPage = p;
+    }
+  
+    setPage(nextPage);
+    setLoading(true);
+    getReviewMCQs(nextPage);
+  };
+
+  // const page = props.page || 1;
   // let [fontsLoaded] = useFonts({
   //   Rubik_400Regular,
   // });
-  const getReviewMCQs = async (page) => {
-    setLoading(true);
-    console.log("ReviewMCQs page " + props.page);
-    let user = await AsyncStorage.getItem("persist:auth");
-    let token = JSON.parse(user).token.slice(1, -1);
-    let data = {
-      subjectid: props.route.params.id,
-      chapterid: "full",
-      offset: (props.page - 1) * 10,
-      userid: props.auth.user.id,
-      sessionid: Math.trunc(Date.now() / 1000),
-    };
-    const searchParams = new URLSearchParams();
-    for (const key in data) {
-      searchParams.append(key, data[key]);
-    }
-    fetch(`${baseUrl}/api/quiz/getrevision`, {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/x-www-form-urlencoded",
-        Authorization: `Bearer ${token}`,
-      },
-      body: searchParams.toString(),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data?.status === "success") {
-          if (data.data) {
-            setMcqs(data.data);
-            setLoading(false);
-            setRefreshing(false);
-          } else {
-            setLoading(false);
-            setRefreshing(false);
-          }
-        } else {
-          Alert.alert("Check your internet connection and try again!", "", [
-            { text: "Try Again", onPress: () => getReviewMCQs(1) },
-          ]);
-        }
-      })
-      .catch((e) => {
-        // Alert.alert("Session Token Expired", "Kindly login again!", [
-        //   {
-        //     text: "Ok",
-        //     onPress: () => {
-        //     //  props.navigation.navigate("SignIn");
-        //       props.logout();
-        //     },
-        //   },
-        // ]);
+  const getReviewMCQs = async (page = 1) => {
+    try {
+      setLoading(true);
+
+      console.log("ReviewAllMCQs fetching page:", page);
+      console.log("Route params:", props.route?.params);
+
+      let user = await AsyncStorage.getItem("persist:auth");
+      let token = JSON.parse(user).token.slice(1, -1);
+
+      const data = {
+        subjectid: props.route.params.subjectid,
+        chapterid: props.route.params.chapterid,
+        offset: (page - 1) * 10,
+        userid: props.auth.user.id,
+        sessionid: Math.trunc(Date.now() / 1000),
+      };
+
+      console.log("Sending request with data:", data);
+
+      const searchParams = new URLSearchParams();
+      for (const key in data) {
+        searchParams.append(key, data[key]);
+      }
+
+      const response = await fetch(`${baseUrl}/api/quiz/getrevision`, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/x-www-form-urlencoded",
+          Authorization: `Bearer ${token}`,
+        },
+        body: searchParams.toString(),
       });
+
+      const result = await response.json();
+      console.log("API Response:", result);
+
+      if (result?.status === "success" && result.data) {
+        setMcqs(result.data);
+      } else {
+        Alert.alert("Check your internet connection and try again!", "", [
+          { text: "Try Again", onPress: () => getReviewMCQs(1) },
+        ]);
+      }
+    } catch (error) {
+      console.error("Error fetching MCQs:", error);
+    } finally {
+      setLoading(false);
+      setRefreshing(false);
+    }
   };
 
   if (loading) {
@@ -130,10 +172,34 @@ const ReviewAllMCQs = (props) => {
   return (
     <View
       style={{
-        paddingHorizontal: 0,
+        padding: 30,
         backgroundColor: "white",
+        height: "100%",
+        marginTop: 20,
       }}
     >
+      <View
+        style={{ flexDirection: "row", alignItems: "center", marginBottom: 10 }}
+      >
+        <TouchableOpacity
+          style={{ marginRight: 20 }}
+          onPress={() => props.navigation.goBack()}
+        >
+          <Feather name="arrow-left" size={24} color="black" />
+        </TouchableOpacity>
+        <Text
+          style={{
+            textAlign: "center",
+            marginRight: 20,
+            fontSize: 18,
+            fontWeight: 500,
+            fontFamily: "Rubik_400Regular",
+          }}
+          selectable={false}
+        >
+          {props.route.params.chapterName}
+        </Text>
+      </View>
       {mcqs.length === 0 ? (
         <Text
           style={{
@@ -302,6 +368,19 @@ const ReviewAllMCQs = (props) => {
           </View>
         </Modal>
       </View>
+      {mcqs.length !== 0 && (
+        <Pagination
+          {...props}
+          subjectid={props.route.params.subjectid}
+          chapterid={props.route.params.chapterid}
+          subjectName={props.route.params.subjectName}
+          chapterName={props.route.params.chapterName}
+          chapterDescription={props.route.params.chapterDescription}
+          updatePage={preupdatePage}
+          page={page}
+          setPage={setPage}
+        />
+      )}
     </View>
   );
 };

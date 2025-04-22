@@ -110,6 +110,30 @@ const SelectChapter = ({ testType, setTestType, ...props }) => {
               displayChapters[Number(clickedIndex) + 1]?.totalquestions,
           });
         }}
+        ReviewAllMCQs={(clickedItem, clickedIndex) => {
+          //  if(isLoaded){
+          //   show()
+          //  }
+
+          props.navigation.navigate("ReviewAllMCQs", {
+            subjectid: props.route.params.id,
+            subjectName: clickedItem.name,
+            chapterid: clickedItem.id,
+            chapterName: props.route.params.subject,
+            totalQuestions: clickedItem.totalquestions,
+            chapterDescription: clickedItem.description,
+            showQuestions: clickedItem.showquestions,
+
+            nextChapterShowQuestions:
+              displayChapters[Number(clickedIndex) + 1]?.showquestions,
+            nextChapterId: displayChapters[Number(clickedIndex) + 1]?.id,
+            nextChapterName: displayChapters[Number(clickedIndex) + 1]?.name,
+            nextChapterDescription:
+              displayChapters[Number(clickedIndex) + 1]?.description,
+            nextChapterTotalQuestions:
+              displayChapters[Number(clickedIndex) + 1]?.totalquestions,
+          });
+        }}
         openOPtionCallback={setOpenOptions}
       />
     ),

@@ -7,13 +7,9 @@ const Pagination = (props) => {
   const totalPages = props.totalPages
     ? props.totalPages
     : Math.ceil(props.route.params.totalQuestions / 10);
-    useEffect(() => {
-      setPage(props.page);
-    },[props.page]);
-
-
-    
-
+  useEffect(() => {
+    setPage(props.page);
+  }, [props.page]);
 
   return (
     <View
@@ -24,7 +20,7 @@ const Pagination = (props) => {
         backgroundColor: "white",
         position: "absolute",
         borderColor: "#e6e6e6",
-        height:70,
+        height: 90,
         borderWidth: 1,
         bottom: 0,
         left: 0,
@@ -32,6 +28,7 @@ const Pagination = (props) => {
         borderTopLeftRadius: 26,
         borderTopRightRadius: 26,
         paddingVertical: 5,
+        alignContent: "center",
       }}
     >
       <View style={{ flexDirection: "row", alignItems: "center" }}>
@@ -68,7 +65,7 @@ const Pagination = (props) => {
             paddingHorizontal: 25,
             marginLeft: 10,
             color: "black",
-            fontSize:16
+            fontSize: 16,
           }}
           value={page.toString()}
           keyboardType="numeric"
@@ -90,10 +87,7 @@ const Pagination = (props) => {
         </Text>
         <TouchableOpacity
           style={{ marginLeft: 10 }}
-          onPress={() => 
-              
-            props.updatePage("inc")
-          }
+          onPress={() => props.updatePage("inc")}
           disabled={page >= props.route.params.totalQuestions / 10}
         >
           <EvilIcons
@@ -133,7 +127,7 @@ const Pagination = (props) => {
               } else {
                 if (props.for === "quiz") {
                   let timeTaken = Date.now() - props.timeStarted;
-                console.log(props.route.params)
+                  console.log(props.route.params);
 
                   props.navigation.navigate("QuizResult", {
                     timeTaken,

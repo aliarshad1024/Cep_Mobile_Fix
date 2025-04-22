@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import Footer from "../../components/Footer";
 import { logout, changeThemeColor } from "../../redux/actions/authActions";
-import { Feather } from "@expo/vector-icons";
+// import { Feather } from "@expo/vector-icons";
 import { connect } from "react-redux";
 import { useFonts } from "expo-font";
 import { Rubik_400Regular } from "@expo-google-fonts/rubik";
@@ -19,6 +19,13 @@ import * as Linking from "expo-linking";
 import url from "../../utils/URL";
 import Modal from "react-native-modal";
 import { baseUrl } from "../../constants/global";
+import {
+  Feather,
+  Ionicons,
+  MaterialIcons,
+  FontAwesome5,
+  SimpleLineIcons,
+} from "@expo/vector-icons";
 
 const Settings = (props) => {
   const [toggleValue, setToggleValue] = useState(false);
@@ -69,6 +76,7 @@ const Settings = (props) => {
           backgroundColor: props.auth.themeMainColor,
           paddingHorizontal: 30,
           paddingVertical: 25,
+          marginTop: 20,
         }}
       >
         <View
@@ -167,7 +175,7 @@ const Settings = (props) => {
           onPress={() => setModalVisible(true)}
           style={{
             flexDirection: "row",
-            marginBottom: 18,
+            marginTop: 30,
             alignItems: "center",
             justifyContent: "space-between",
           }}
@@ -183,6 +191,12 @@ const Settings = (props) => {
               size={24}
               color={props.auth.themeMainColor}
             /> */}
+            <Ionicons
+              name="color-palette-outline"
+              size={24}
+              color={props.auth.themeMainColor}
+            />
+
             <Text
               style={{
                 fontSize: 14,
@@ -206,7 +220,7 @@ const Settings = (props) => {
         </TouchableOpacity>
 
         <TouchableOpacity
-          style={{ flexDirection: "row", marginBottom: 18 }}
+          style={{ flexDirection: "row", marginTop: 30 }}
           onPress={() =>
             Linking.openURL("mailto:competativeexaminationpakistan@gmail.com")
           }
@@ -225,6 +239,12 @@ const Settings = (props) => {
             size={24}
             color={props.auth.themeMainColor}
           /> */}
+          <MaterialIcons
+            name="support-agent"
+            size={24}
+            color={props.auth.themeMainColor}
+          />
+
           <Text
             style={{
               fontSize: 14,
@@ -244,9 +264,9 @@ const Settings = (props) => {
                 "Check out this awesome app: https://competitiveexaminationpakistan.com/",
             })
           }
-          style={{ flexDirection: "row", marginBottom: 18 }}
+          style={{ flexDirection: "row", marginTop: 30 }}
         >
-          {/* <Feather name="share-2" size={24} color={props.auth.themeMainColor} /> */}
+          <Feather name="share-2" size={24} color={props.auth.themeMainColor} />
           <Text
             style={{
               fontSize: 14,
@@ -261,14 +281,18 @@ const Settings = (props) => {
 
         <TouchableOpacity
           onPress={() => props.navigation.navigate("AboutUs")}
-          style={{ flexDirection: "row", marginBottom: 18 }}
+          style={{ flexDirection: "row", marginTop: 30 }}
         >
           {/* <SimpleLineIcons
             name="question"
             size={20}
             color={props.auth.themeMainColor}
           /> */}
-
+          <SimpleLineIcons
+            name="question"
+            size={20}
+            color={props.auth.themeMainColor}
+          />
           <Text
             style={{
               fontSize: 14,

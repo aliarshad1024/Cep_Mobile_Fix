@@ -28,6 +28,7 @@ const QuizResult = (props) => {
           flexDirection: "row",
           justifyContent: "space-between",
           alignItems: "center",
+          marginTop:30
         }}
       >
         <View style={{ flexDirection: "row", alignItems: "center" }}>

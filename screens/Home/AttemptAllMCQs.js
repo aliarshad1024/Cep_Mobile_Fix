@@ -155,6 +155,7 @@ const AttemptAllMCQs = (props) => {
       style={{
         backgroundColor: "white",
         height: "100%",
+        marginTop:20
       }}
     >
       {props.route.params.subjectName && (

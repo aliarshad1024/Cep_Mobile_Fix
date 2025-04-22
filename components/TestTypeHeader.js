@@ -14,6 +14,7 @@ const TestTypeHeader = (props) => {
       <View
         style={{
           padding: 20,
+          marginTop:20
         }}
       >
         <View

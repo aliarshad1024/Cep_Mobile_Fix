@@ -157,7 +157,7 @@ const SubjectSelected = (props) => {
   return (
     <View
       style={{
-        padding: 15,
+        padding: 20,
         backgroundColor: "white",
         height: "100%",
       }}
@@ -168,6 +168,7 @@ const SubjectSelected = (props) => {
           justifyContent: "space-between",
           alignItems: "center",
           margin: 10,
+          marginTop:20
         }}
       >
         <View style={{ flexDirection: "row", alignItems: "center" }}>

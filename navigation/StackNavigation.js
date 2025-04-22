@@ -21,6 +21,7 @@ import Profile from "../screens/Profile";
 import AttemptAllMCQs from "../screens/Home/AttemptAllMCQs";
 import ForgotPassword from "../screens/authentication/ForgotPassword";
 import AboutUsScreen from "../screens/settings/AboutUs";
+import ReviewAllMCQs from "../screens/Home/ReviewAllMCQs";
 const Stack = createStackNavigator();
 
 import { connect } from "react-redux";
@@ -32,7 +33,7 @@ import { StatusBar } from "expo-status-bar";
 const MainStack = (props) => {
   return (
     <>
-      <View style={{ marginBottom: 30 }}>
+      <View>
         <StatusBar backgroundColor={props.auth.themeMainColor} />
       </View>
       <Stack.Navigator initialRouteName="TestType">
@@ -71,6 +72,11 @@ const MainStack = (props) => {
         <Stack.Screen
           name="AttemptAllMCQs"
           component={AttemptAllMCQs}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="ReviewAllMCQs"
+          component={ReviewAllMCQs}
           options={{ headerShown: false }}
         />
 

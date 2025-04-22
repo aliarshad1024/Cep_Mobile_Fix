@@ -164,7 +164,7 @@ const SelectSubject = (props) => {
                 fontFamily: "Rubik_400Regular",
               }}
             >
-              Customize Quiz
+              Mock Exam
             </Text>
             <Text
               style={{
@@ -381,6 +381,7 @@ const SelectSubject = (props) => {
         <View
           style={{
             padding: 30,
+            marginTop:20
           }}
         >
           <View

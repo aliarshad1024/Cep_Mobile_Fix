@@ -7,8 +7,8 @@ const MCQItem = ({
   index,
   page,
   mainProps,
-  showDetailModal,
   isReview,
+  showDetailModal,
 }) => {
   return (
     <View style={styles.mainContainer} key={index}>

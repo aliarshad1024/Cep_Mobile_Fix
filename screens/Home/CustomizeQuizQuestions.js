@@ -122,6 +122,7 @@ const CustomizeQuizQuestions = (props) => {
         padding: 20,
         backgroundColor: "white",
         height: "100%",
+        marginTop:30
       }}
     >
       <View style={{ flexDirection: "row" }}>

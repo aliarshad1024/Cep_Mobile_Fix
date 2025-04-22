@@ -13,6 +13,7 @@ const ChapterItem = ({
   quizClicked,
   mcqsClicked,
   testType,
+  ReviewAllMCQs,
   setTestType, // <- receive it here
 }) => {
   const [subject, setSubject] = useState(mainProps.route.params.subject);
@@ -99,8 +100,24 @@ const ChapterItem = ({
               </View>
             </TouchableOpacity>
 
+            <TouchableOpacity
+              style={{ flex: 1 }}
+              onPress={() => ReviewAllMCQs(item, index)}
+            >
+              <View
+                style={[
+                  styles.secondaryViewButtons,
+                  { backgroundColor: mainProps.auth.themeMainColor },
+                ]}
+              >
+                <Text style={styles.buttonTxt} selectable={false}>
+                  One Liner
+                </Text>
+              </View>
+            </TouchableOpacity>
+
             {/* Review MCQs Button */}
-            {testTypesArray.map((itemType, i) => (
+            {/* {testTypesArray.map((itemType, i) => (
               <TouchableOpacity
                 key={`type-${i}`}
                 style={{ flex: 1 }}
@@ -129,7 +146,7 @@ const ChapterItem = ({
                   </Text>
                 </View>
               </TouchableOpacity>
-            ))}
+            ))} */}
 
             {/* Quiz Button */}
             <TouchableOpacity

@@ -7,7 +7,7 @@ import {
   Alert,
   Image,
   StyleSheet,
-  ToastAndroid
+  ToastAndroid,
 } from "react-native";
 import React, { useState, useEffect } from "react";
 import { Feather, FontAwesome } from "@expo/vector-icons";
@@ -20,12 +20,11 @@ import { logout } from "../redux/actions/authActions";
 import { useFonts } from "expo-font";
 import { Rubik_400Regular } from "@expo-google-fonts/rubik";
 import * as FileSystem from "expo-file-system";
-import * as Permissions from 'expo-permissions';
+import * as Permissions from "expo-permissions";
 import ModalAlert from "../components/ModalAlert";
 import { clearMessage } from "../redux/actions/authActions";
 import { baseUrl } from "../constants/global";
-
-
+// import {BannerAd, BannerAdSize, RewardedAd, TestIds, AdEventType, RewardedAdEventType, RewardedInterstitialAd, useRewardedInterstitialAd} from 'react-native-google-mobile-ads';
 
 const Jobs = (props) => {
   const [loading, setLoading] = useState(true);
@@ -36,19 +35,39 @@ const Jobs = (props) => {
   const [uri, setUri] = useState(null);
   const [downloadingFileId, setDownloadingFileId] = useState(null);
   const [downloadingFilePath, setDownloadingFilePath] = useState(null);
-  const [downloadStarted, setDownloadStarted] = useState(false)
-  
-//  downloadFile(item.path, item.path.split("/").pop());
+  const [downloadStarted, setDownloadStarted] = useState(false);
 
+  //  downloadFile(item.path, item.path.split("/").pop());
+
+  // const { isLoaded, isClosed, load, show, isEarnedReward,error }  = useRewardedInterstitialAd(admobRewardedInterestial, {
+  //   requestNonPersonalizedAdsOnly: true,
+  // });
+
+  // useEffect(()=>{
+  //   load()
+  // },[isClosed])
+
+  // useEffect(() => {
+  // console.log("is Loaded."+isLoaded)
+  // if(!isLoaded){
+  //  load();
+  //  console.log("Rewarded Loading...")
+
+  // }
+  // }, [load, ]);
+
+  // useEffect(()=>{
+
+  //     downloadFile()
+
+  // },[])
 
   useEffect(() => {
     getJobs();
   }, []);
-
   let [fontsLoaded] = useFonts({
     Rubik_400Regular,
   });
-
   const getJobs = async () => {
     let user = await AsyncStorage.getItem("persist:auth");
     let token = JSON.parse(user).token.slice(1, -1);
@@ -70,8 +89,14 @@ const Jobs = (props) => {
     })
       .then((res) => res.json())
       .then((data) => {
-        setJobs(data.data);
-        setFilterJobs(data.data);
+        if (Array.isArray(data.data)) {
+          setJobs(data.data);
+          setFilterJobs(data.data);
+        } else {
+          setJobs([]); // fallback to empty array
+          setFilterJobs([]);
+          console.warn("Unexpected jobs data format", data);
+        }
         setLoading(false);
         setRefreshing(false);
       })
@@ -94,12 +119,12 @@ const Jobs = (props) => {
 
   // const requestExternalStoragePermission = async () => {
   //   const { status } = await Permissions.askAsync(Permissions.MEDIA_LIBRARY_WRITE_ONLY);
-  
+
   //   if (status !== 'granted') {
   //     console.error('Permission to access external storage denied.');
   //     return false;
   //   }
-  
+
   //   return true;
   // };
 
@@ -110,59 +135,66 @@ const Jobs = (props) => {
   //       ToastAndroid.show("Permissions granted", ToastAndroid.SHORT);
   //     } else {
   //       ToastAndroid.show("Permissions Rejected", ToastAndroid.SHORT);
-    
+
   //     }
-  //   } 
+  //   }
   // }
 
-
   async function saveFile(uri, filename, mimetype) {
-    console.log("save file called "+filename+" "+mimetype)
+    console.log("save file called " + filename + " " + mimetype);
     if (Platform.OS === "android") {
-      const permissions = await FileSystem.StorageAccessFramework.requestDirectoryPermissionsAsync();
-  
+      const permissions =
+        await FileSystem.StorageAccessFramework.requestDirectoryPermissionsAsync();
+
       if (permissions.granted) {
-        const base64 = await FileSystem.readAsStringAsync(uri, { encoding: FileSystem.EncodingType.Base64 });
-  
-        await FileSystem.StorageAccessFramework.createFileAsync(permissions.directoryUri, filename, mimetype)
+        const base64 = await FileSystem.readAsStringAsync(uri, {
+          encoding: FileSystem.EncodingType.Base64,
+        });
+
+        await FileSystem.StorageAccessFramework.createFileAsync(
+          permissions.directoryUri,
+          filename,
+          mimetype
+        )
           .then(async (uri) => {
-            await FileSystem.writeAsStringAsync(uri, base64, { encoding: FileSystem.EncodingType.Base64 }).then((newuri)=>{
-                 console.log("done "+newuri)
-                 setUri("Internal Storage/Cep")
-                 setShowModal(true);
-                 setDownloadingFileId(null);
-                 setDownloadStarted(false)
+            await FileSystem.writeAsStringAsync(uri, base64, {
+              encoding: FileSystem.EncodingType.Base64,
+            }).then((newuri) => {
+              console.log("done " + newuri);
+              setUri("Internal Storage/Cep");
+              setShowModal(true);
+              setDownloadingFileId(null);
+              setDownloadStarted(false);
             });
           })
-          .catch(e => console.log(e));
+          .catch((e) => console.log(e));
       } else {
-       // shareAsync(uri);
+        // shareAsync(uri);
       }
     } else {
       //shareAsync(uri);
     }
   }
 
-  const downloadFile = async ( downloadingFilePathn) => {
-   //                    downloadFile(item.path, item.path.split("/").pop());
-    setDownloadStarted(true)
-    let url = "" 
+  const downloadFile = async (downloadingFilePathn) => {
+    //                    downloadFile(item.path, item.path.split("/").pop());
+    setDownloadStarted(true);
+    let url = "";
     url = downloadingFilePathn;
-    var filename = ""
-    
-    console.log("url "+url)
-    if(url.includes("https")){
-       console.log("includes https")
-       filename = url.split("/").pop()
-    }else{
-      console.log("dont includes")
-      filename = url.split("/").pop()
+    var filename = "";
+
+    console.log("url " + url);
+    if (url.includes("https")) {
+      console.log("includes https");
+      filename = url.split("/").pop();
+    } else {
+      console.log("dont includes");
+      filename = url.split("/").pop();
     }
-    console.log("filename "+filename)
-     
+    console.log("filename " + filename);
+
     const directory = `${FileSystem.documentDirectory}/CEP`;
     const fileUri = `${directory}/${filename}`;
-
 
     try {
       await FileSystem.makeDirectoryAsync(directory, { intermediates: true });
@@ -174,15 +206,20 @@ const Jobs = (props) => {
 
     try {
       const result = await downloadResumable.downloadAsync();
-      await saveFile(result.uri, filename,  'application/pdf')
-     
+      await saveFile(result.uri, filename, "application/pdf");
     } catch (e) {
-      setDownloadStarted(false)
+      setDownloadStarted(false);
       console.error(e);
     }
   };
 
   const searchJob = (searchKeyword) => {
+    console.log("Searching in jobs:", jobs); // log the type and content
+    if (!Array.isArray(jobs)) {
+      console.warn("jobs is not an array:", jobs);
+      return;
+    }
+
     if (searchKeyword === "") {
       setFilterJobs(jobs);
     } else {
@@ -192,7 +229,6 @@ const Jobs = (props) => {
       setFilterJobs(filteredJobs);
     }
   };
-
 
   const filteringJobs = (searchKeyword) => {
     if (searchKeyword === "") {
@@ -204,7 +240,6 @@ const Jobs = (props) => {
       setFilterJobs(filteredJobs);
     }
   };
-
 
   const bookmark = async (id) => {
     let user = await AsyncStorage.getItem("persist:auth");
@@ -237,6 +272,20 @@ const Jobs = (props) => {
     });
   };
 
+  function showRewardedAddDialog() {
+    if (isLoaded) {
+      Alert.alert(
+        "Download",
+        "In order to download 'pdf', we need you to watch an Ad.",
+        [
+          { text: "Watch", onPress: () => show() },
+          { text: "Don't Watch", onPress: () => console.log("close") },
+        ]
+      );
+    } else {
+      downloadFile();
+    }
+  }
 
   const unbookmark = async (id) => {
     let user = await AsyncStorage.getItem("persist:auth");
@@ -277,12 +326,13 @@ const Jobs = (props) => {
         paddingVertical: 20,
         backgroundColor: "white",
       }}
-    > 
+    >
       <View>
         <View
           style={{
             flexDirection: "row",
             marginBottom: 20,
+            marginTop:20
           }}
         >
           <TouchableOpacity
@@ -296,7 +346,7 @@ const Jobs = (props) => {
               textAlign: "center",
               marginRight: 20,
               fontSize: 18,
-              fontWeight: "500",
+              fontWeight: 500,
               fontFamily: "Rubik_400Regular",
             }}
           >
@@ -318,10 +368,10 @@ const Jobs = (props) => {
           }}
         >
           <View style={{ flexDirection: "row", alignItems: "center" }}>
-            {/* <Image
+            <Image
               source={require("../assets/icons/searchIcon.png")}
               style={{ width: 17, height: 17, marginRight: 20 }}
-            /> */}
+            />
             <TextInput
               placeholder="Search"
               placeholderTextColor="#888"
@@ -348,7 +398,7 @@ const Jobs = (props) => {
           <Text
             style={{
               fontSize: 14,
-              fontWeight: "500",
+              fontWeight: 500,
               fontFamily: "Rubik_400Regular",
             }}
           >
@@ -357,7 +407,7 @@ const Jobs = (props) => {
           <Text
             style={{
               fontSize: 12,
-              fontWeight: "400",
+              fontWeight: 400,
               color: "rgba(189, 189, 189, 1)",
               fontFamily: "Rubik_400Regular",
             }}
@@ -377,25 +427,15 @@ const Jobs = (props) => {
           }}
           refreshing={refreshing}
           renderItem={({ item, index }) => (
-          
-            <View
-              style={styles.mainContainer}
-              key={index}
-            >
-              <View
-                style={styles.horizontalStyler}
-              >
+            <View style={styles.mainContainer} key={index}>
+              <View style={styles.horizontalStyler}>
                 <View>
-                  <Text
-                    style={styles.nameTextStyler}
-                    selectable={false}
-                  > {console.log("Job item "+JSON.stringify(item))} 
+                  <Text style={styles.nameTextStyler} selectable={false}>
+                    {" "}
+                    {console.log("Job item " + JSON.stringify(item))}
                     {item.jobname}
                   </Text>
-                  <Text
-                    style={styles.dateStyler}
-                    selectable={false}
-                  >
+                  <Text style={styles.dateStyler} selectable={false}>
                     Last date: {item.expirydate}
                   </Text>
                 </View>
@@ -427,25 +467,18 @@ const Jobs = (props) => {
                 </TouchableOpacity>
               </View>
 
-              <View
-                style={styles.secondaryContainer}
-              >
-                <View
-                  style={styles.pdfContainer}
-                >
-                  <Feather
+              <View style={styles.secondaryContainer}>
+                <View style={styles.pdfContainer}>
+                  {/* <Feather
                     name="file-text"
                     size={24}
                     color="rgba(203, 16, 0, 1)"
-                  />
+                  /> */}
                   <Image
                     source={require("../assets/icons/pdf.png")}
                     style={styles.imageIcon}
                   />
-                  <Text
-                    style={styles.pdfText}
-                    selectable={false}
-                  >
+                  <Text style={styles.pdfText} selectable={false}>
                     {item.path.split("/").pop()}
                   </Text>
                 </View>
@@ -453,8 +486,9 @@ const Jobs = (props) => {
                   onPress={() => {
                     setDownloadingFileId(item.id);
                     setDownloadingFilePath(item.path);
-                    console.log("path "+item.path)
-                    downloadFile(item.path)
+                    console.log("path " + item.path);
+                    downloadFile(item.path);
+                    //                   showRewardedAddDialog()
                   }}
                   disabled={downloadingFileId === item.id}
                 >
@@ -491,62 +525,58 @@ const Jobs = (props) => {
   );
 };
 
+const styles = StyleSheet.create({
+  mainContainer: {
+    padding: 18,
+    backgroundColor: "#FFFFFF",
+    borderWidth: 0.5,
+    borderColor: "#DADADA",
+    borderRadius: 8,
+    marginVertical: 6,
+  },
+  horizontalStyler: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  nameTextStyler: {
+    fontWeight: 500,
+    fontSize: 16,
+    fontFamily: "Rubik_400Regular",
+  },
+  dateStyler: {
+    fontWeight: 400,
+    fontSize: 13,
+    color: "rgba(176, 176, 176, 1)",
+    fontFamily: "Rubik_400Regular",
+    marginTop: 5,
+  },
+  rightMarginA: { marginRight: 2 },
+  rightMarginB: { marginRight: 6 },
 
-
-const styles= StyleSheet.create({
-  mainContainer:{
-   padding: 18,
-   backgroundColor: "#FFFFFF",
-   borderWidth: 0.5,
-   borderColor: "#DADADA",
-   borderRadius: 8,
-   marginVertical: 6,
- },
-  horizontalStyler:{
-   flexDirection: "row",
-   justifyContent: "space-between",
- },
-  nameTextStyler:{          
-     fontWeight: "500",
-     fontSize: 16,
-     fontFamily: "Rubik_400Regular",          
- },
- dateStyler:{
-   fontWeight: "400",
-   fontSize: 13,
-   color: "rgba(176, 176, 176, 1)",
-   fontFamily: "Rubik_400Regular",
-   marginTop: 5,
- },
- rightMarginA:{ marginRight: 2 },  
- rightMarginB:{ marginRight: 6 },
-
- secondaryContainer:{
-   flexDirection: "row",
-   justifyContent: "space-between",
-   alignItems: "center",
-   marginTop: 10,
- },
- pdfContainer:{
-   flexDirection: "row",
-   alignItems: "center",
-   marginTop: 5,
- },
- imageIcon:{
-    width: 28, 
-    height: 28 
- },
- pdfText:{
-     marginLeft: 10,
-     fontSize: 12,
-     fontFamily: "Rubik_400Regular",
- },
- downloadContainer:{
-   
-     width: 90,
-     height: 30,
-   
- }
+  secondaryContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginTop: 10,
+  },
+  pdfContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginTop: 5,
+  },
+  imageIcon: {
+    width: 28,
+    height: 28,
+  },
+  pdfText: {
+    marginLeft: 10,
+    fontSize: 12,
+    fontFamily: "Rubik_400Regular",
+  },
+  downloadContainer: {
+    width: 90,
+    height: 30,
+  },
 });
 
 const mapStateToProps = (state) => ({

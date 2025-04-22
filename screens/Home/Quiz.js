@@ -104,11 +104,11 @@ const Quiz = (props) => {
   //   if (isClosed) updatePage();
   // }, [isClosed]);
 
-  useEffect(() => {
-    if (page % 4 == 0 && !isLoaded) {
-      load();
-    }
-  }, [page]);
+  // useEffect(() => {
+  //   if (page % 4 == 0 && !isLoaded) {
+  //     load();
+  //   }
+  // }, [page]);
 
   useEffect(() => {
     if (
@@ -283,39 +283,71 @@ const Quiz = (props) => {
       });
   };
 
+  // const preupdatePage = async (type, p) => {
+  //   setType(type);
+  //   setP(p);
+  //   if (page % 4 == 0 && isLoaded) {
+  //     show();
+  //   } else {
+  //     updatePageSkipAd(type, p);
+  //   }
+  // };
+
   const preupdatePage = async (type, p) => {
-    setType(type);
-    setP(p);
-    if (page % 4 == 0 && isLoaded) {
-      show();
-    } else {
-      updatePageSkipAd(type, p);
-    }
+    updatePageSkipAd(type, p);
   };
 
+  // const updatePageSkipAd = (type, p) => {
+  //   if (type === "inc") {
+  //     if (page * 10 === mcqs.length) {
+  //       if (page < Math.trunc(props.route.params.totalQuestions / 10) + 1) {
+  //         setPage(page + 1);
+  //         setLoadingData(true);
+  //         getMCQs(page + 1);
+  //       }
+  //     } else {
+  //       setPage(page + 1);
+  //       setDisplayMcqs(mcqs.slice(page * 10, (page + 1) * 10));
+  //     }
+  //   } else if (type === "dec") {
+  //     if (page > 1) {
+  //       setPage(page - 1);
+  //       setDisplayMcqs(mcqs.slice((page - 1) * 10, page * 10));
+  //       // setLoadingData(true);
+  //     }
+  //   } else {
+  //     setPage(p);
+  //     setLoadingData(true);
+  //     getMCQs(p);
+  //   }
+  // };
+
   const updatePageSkipAd = (type, p) => {
+    console.log("inside updatePage");
+    console.log("type " + type);
+  
+    let nextPage = page;
+  
     if (type === "inc") {
-      if (page * 10 === mcqs.length) {
-        if (page < Math.trunc(props.route.params.totalQuestions / 10) + 1) {
-          setPage(page + 1);
-          setLoadingData(true);
-          getMCQs(page + 1);
-        }
+      const maxPages = Math.ceil(props.route.params.totalQuestions / 10);
+      if (page < maxPages) {
+        nextPage = page + 1;
       } else {
-        setPage(page + 1);
-        setDisplayMcqs(mcqs.slice(page * 10, (page + 1) * 10));
+        return; // already at last page
       }
     } else if (type === "dec") {
       if (page > 1) {
-        setPage(page - 1);
-        setDisplayMcqs(mcqs.slice((page - 1) * 10, page * 10));
-        // setLoadingData(true);
+        nextPage = page - 1;
+      } else {
+        return; // already at first page
       }
-    } else {
-      setPage(p);
-      setLoadingData(true);
-      getMCQs(p);
+    } else if (typeof p === "number") {
+      nextPage = p;
     }
+  
+    setPage(nextPage);
+    setLoading(true);
+    getMCQs(nextPage);
   };
 
   const updatePage = () => {
@@ -353,6 +385,8 @@ const Quiz = (props) => {
         paddingTop: 10,
         backgroundColor: "white",
         height: "100%",
+        marginTop:20,
+        paddingBottom:80
       }}
     >
       <View style={{ flexDirection: "row", alignItems: "center" }}>

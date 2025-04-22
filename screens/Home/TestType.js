@@ -13,38 +13,41 @@ import { connect } from "react-redux";
 // import {BannerAd, BannerAdSize, RewardedAd, TestIds, AdEventType, RewardedAdEventType, RewardedInterstitialAd, useRewardedInterstitialAd} from 'react-native-google-mobile-ads';
 import url from "../../utils/URL";
 import Loading from "../../components/Loading";
-import { logout, shufflelogin, rewardedShown, rewardedNot } from "../../redux/actions/authActions";
+import {
+  logout,
+  shufflelogin,
+  rewardedShown,
+  rewardedNot,
+} from "../../redux/actions/authActions";
 // import { useFonts } from "expo-font";
 // import { Rubik_400Regular } from "@expo-google-fonts/rubik";
 import PushNotifications from "../../utils/PushNotifications";
-import { baseUrl, admobAdBanner, admobTestRewarded, admobRewardedInterestial } from "../../constants/global";
+import {
+  baseUrl,
+  admobAdBanner,
+  admobTestRewarded,
+  admobRewardedInterestial,
+} from "../../constants/global";
 import { Button } from "react-native";
 import { ToastAndroid } from "react-native";
-
-
 
 const TestType = (props) => {
   const [exams, setExams] = useState([]);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
-  
+
   // let [fontsLoaded] = useFonts({
   //   Rubik_400Regular,
   // });
-
-
-
 
   // const rewarded_admobAd = RewardedInterstitialAd.createForAdRequest("ca-app-pub-3940256099942544/5354046379", {
   //   requestNonPersonalizedAdsOnly: true,
   //   keywords: ['fashion', 'clothing'],
   // });
 
-
   // const { isLoaded, isClosed, load, show, isEarnedReward,error }  = useRewardedInterstitialAd(admobRewardedInterestial, {
   //   requestNonPersonalizedAdsOnly: true,
   // });
-  
 
   // useEffect(() => {
   //   // Start loading the interstitial straight away
@@ -65,24 +68,20 @@ const TestType = (props) => {
   // useEffect(() => {
   //   // Start loading the interstitial straight away
   //   //if(props.auth.rewardedShown!=true){
-  
-  // console.log("is Loaded."+isLoaded)    
-  // if(!isLoaded){ 
+
+  // console.log("is Loaded."+isLoaded)
+  // if(!isLoaded){
   //  load();
   //  console.log("Rewarded Loading...")
- 
+
   // }
   // }, [load, ]);
-
-
-
 
   // useEffect(()=>{
   //   if(isEarnedReward){
   //     props.navigation.navigate("CustomizeQuiz")
   //   }
   // },[isEarnedReward])
-
 
   // useEffect(() => {
   //   const unsubscribe = rewarded_admobAd.addAdEventListener(RewardedAdEventType.LOADED,
@@ -102,7 +101,7 @@ const TestType = (props) => {
   //     }
   //   );
 
-  //   const errorChecker = rewarded_admobAd.addAdEventListener(AdEventType.ERROR, 
+  //   const errorChecker = rewarded_admobAd.addAdEventListener(AdEventType.ERROR,
   //     (err) => {
   //     console.log("got error "+JSON.stringify(err))
   //     }
@@ -118,14 +117,14 @@ const TestType = (props) => {
 
   //   // const earnedReward = rewarded_admobAd.addAdEventListener(RewardedAdEventType.EARNED_REWARD, () => {
   //   //   //setRewardInterShown(true)
-    
+
   //   // });
   //  //  setRewardInterLoaded(true)
   //  //  setRewardInterShown(false)
   //   rewarded_admobAd.load();
-  //   console.log("Ad Loading...")      
+  //   console.log("Ad Loading...")
   //   // if(props.auth.rewardedShown!=true){
-  //   //   rewarded_admobAd.load();      
+  //   //   rewarded_admobAd.load();
   //   // }
   //   return ()=> {
   //   unsubscribe();
@@ -134,10 +133,6 @@ const TestType = (props) => {
   //   reload()
   //   }
   // }, []);
-
-
- 
-
 
   useEffect(() => {
     getExams();
@@ -161,7 +156,7 @@ const TestType = (props) => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log("response css screen "+JSON.stringify(data))
+        console.log("response css screen " + JSON.stringify(data));
         if (data.message === "Token has expired") {
           Alert.alert("Session Token Expired!", "Kindly login again!", [
             {
@@ -197,29 +192,25 @@ const TestType = (props) => {
     }
   }
 
+  useEffect(() => {
+    // console.log("welcome "+props.auth.welcomePageSeen)
+    if (props.auth.welcomePageSeen == false) {
+      //  console.log("welcome  b"+props.auth.welcomePageSeen)
 
-  useEffect(()=>{
-   // console.log("welcome "+props.auth.welcomePageSeen)
-    if (props.auth.welcomePageSeen==false) {
-    //  console.log("welcome  b"+props.auth.welcomePageSeen)
-   
       props.navigation.navigate("AppIntro");
     }
-  },[])
+  }, []);
 
-
-  function showRewardedAddDialog(){
-        // if(isLoaded){  
-        //   Alert.alert("Customize Quiz", "In order to attempt 'Customize Quiz', we need you to watch an Ad.", [
-        //       { text: "Watch", onPress: () => show() },
-        //       { text: "Don't Watch", onPress: () => console.log("close") },
-        //   ]);
-        // }else{
-        // }
-        props.navigation.navigate("CustomizeQuiz")
+  function showRewardedAddDialog() {
+    // if(isLoaded){
+    //   Alert.alert("Customize Quiz", "In order to attempt 'Customize Quiz', we need you to watch an Ad.", [
+    //       { text: "Watch", onPress: () => show() },
+    //       { text: "Don't Watch", onPress: () => console.log("close") },
+    //   ]);
+    // }else{
+    // }
+    props.navigation.navigate("CustomizeQuiz");
   }
-
-
 
   if (loading) {
     return (
@@ -232,13 +223,13 @@ const TestType = (props) => {
   return (
     <View style={{ height: "100%", backgroundColor: "white" }}>
       <View>
-        
-      
-      <View style={{
-        marginVertical:5,
-        alignSelf:'center'
-      }}> 
-      {/* <BannerAd 
+        <View
+          style={{
+            marginVertical: 5,
+            alignSelf: "center",
+          }}
+        >
+          {/* <BannerAd 
         size={BannerAdSize.BANNER}
         unitId={admobAdBanner}
         onAdLoaded={() => {
@@ -248,8 +239,8 @@ const TestType = (props) => {
           console.error('Advert failed to load: ', error);
         }}
       />  */}
-      </View>
-       {/* <TouchableOpacity
+        </View>
+        {/* <TouchableOpacity
                     style={{
                       backgroundColor: "rgba(255, 143, 15, 1)",
                       paddingVertical: 5,
@@ -265,12 +256,9 @@ const TestType = (props) => {
                       Rewarded Not Status 
                     </Text>
                   </TouchableOpacity>  */}
-      <View>
-
-
-      </View>
+        <View></View>
         <FlatList
-          style={{marginBottom:50}} 
+          style={{ marginBottom: 50 }}
           data={exams}
           numColumns={1}
           contentContainerStyle={{ paddingBottom: 70 }}
@@ -301,7 +289,7 @@ const TestType = (props) => {
                     // fontFamily: "Rubik_400Regular",
                   }}
                 >
-                  Customize Quiz
+                  Mock Exam
                 </Text>
                 <Text
                   style={{
@@ -411,4 +399,9 @@ const mapStateToProps = (state) => ({
   auth: state.auth,
 });
 
-export default connect(mapStateToProps, { logout, shufflelogin, rewardedShown, rewardedNot })(TestType);
+export default connect(mapStateToProps, {
+  logout,
+  shufflelogin,
+  rewardedShown,
+  rewardedNot,
+})(TestType);
